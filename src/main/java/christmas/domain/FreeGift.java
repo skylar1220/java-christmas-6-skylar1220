@@ -24,6 +24,10 @@ public enum FreeGift {
                 .orElse(NOTHING);
     }
 
+    public int sumWith(int other) {
+        return price + other;
+    }
+
     public int getPrice() {
         return price;
     }
