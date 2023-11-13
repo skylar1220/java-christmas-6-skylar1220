@@ -2,6 +2,7 @@ package christmas;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.domain.Badge;
 import christmas.domain.DiscountSummary;
 import christmas.domain.Event;
 import christmas.domain.OrderGroup;
@@ -73,5 +74,22 @@ public class DiscountSummaryTest {
         DiscountSummary discountSummary = DiscountSummary.from(VisitDate.from(date),
                 OrderGroup.from(orderGroup));
         assertThat(discountSummary.getDiscountWithGift()).isEqualTo(discountWithGift);
+    }
+    public static Stream<Arguments> badgeData() {
+        return Stream.of(
+                Arguments.of(3, List.of("시저샐러드-1"), Badge.NOTHING),
+                Arguments.of(3, List.of("티본스테이크-1", "바비큐립-1", "초코케이크-2"), Badge.STAR),
+                Arguments.of(3, List.of("타파스-1", "초코케이크-2", "아이스크림-3"), Badge.TREE),
+                Arguments.of(3, List.of("티본스테이크-1", "바비큐립-1", "초코케이크-2", "제로콜라-1"), Badge.SANTA)
+        );
+    }
+
+    @DisplayName("총 혜택 금액을 통해 이벤트 배지를 부여한다")
+    @ParameterizedTest
+    @MethodSource("badgeData")
+    void getBadge(int date, List<String> orderGroup, Badge badge) {
+        DiscountSummary discountSummary = DiscountSummary.from(VisitDate.from(date),
+                OrderGroup.from(orderGroup));
+        assertThat(discountSummary.getBadge()).isEqualTo(badge);
     }
 }

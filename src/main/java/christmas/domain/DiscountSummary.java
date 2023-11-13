@@ -43,4 +43,8 @@ public class DiscountSummary {
     public EnumMap<Event, Integer> getSummary() {
         return summary;
     }
+
+    public Badge getBadge() {
+        return Badge.from(getDiscountWithGift());
+    }
 }
