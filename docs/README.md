@@ -11,9 +11,9 @@
 - 총 구매 금액을 계산하는 기능
   - [x] 주문 목록을 통해 총 구매 금액을 계산한다.
 - 할인 항목과 금액을 계산하는 기능
-  - [ ] 주문을 통해 할인 항목과 금액을 계산한다.
+  - [x] 주문 목록을 통해 할인 항목과 금액을 계산한다.
 - 총 할인 금액을 계산하는 기능(증정 혜택 적용 전)
-  - 할인 항목과 금액을 통해 총 할인 금액을 계산한다.
+  - [ ] 할인 항목과 금액을 통해 총 할인 금액을 계산한다.
 - 증정 혜택을 부여하는 기능
   - [ ] 할인 전 총 주문 금액을 통해 증정 혜택을 부여한다.
 - 총 할인 금액을 계산하는 기능(증정 혜택 적용 후)
@@ -76,32 +76,6 @@
   - [x] 중복되는 메뉴가 없는지
   - [x] 음료만 주문하지는 않았는지
 
-# 📌 추가 요구 사항
-- [ ] 도메인 로직에 단위 테스트를 구현해야 한다. 단, UI(System.out, System.in, Scanner) 로직은 제외한다.
-- [ ] 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException를 발생시키고, "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.
-  - Exception이 아닌 IllegalArgumentException, IllegalStateException 등과 같은 명확한 유형을 처리한다.
-- [ ] 아래 있는 InputView, OutputView 클래스를 참고하여 입출력 클래스를 구현한다. 
-  - 입력과 출력을 담당하는 클래스를 별도로 구현한다. 
-  - 해당 클래스의 패키지, 클래스명, 메서드의 반환 타입과 시그니처는 자유롭게 구현할 수 있다.
-  ```java
-  public class InputView {
-      public int readDate() {
-          System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
-          String input = Console.readLine();    
-          // ...
-      }
-      // ...
-  }
-  ```
-  ```java
-  public class OutputView {
-      public void printMenu() {
-          System.out.println("<주문 메뉴>");
-          // ...
-      }
-      // ...
-  }
-  ```
 
 # 🛠 리팩토링 목록   
 - [ ] 요구사항 하나씩 줄쳐가면서 빠뜨린 것 없는지 확인
@@ -121,6 +95,8 @@
 - [ ] 부생성자가 합당한지, 
 - [ ] 부생성자가 있는 경우 생성자의 접근제어자가 private인지
 - [ ] order.sumCountWith(count): 디미터 법칙 점검
+- [ ] order - count.getCount();: 디미터 법칙 점검
+- [ ] DateGroup 방식 간소화 또는 enum화
 
 
 # 🧐 고민해볼 주제

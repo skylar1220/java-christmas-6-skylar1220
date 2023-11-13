@@ -37,4 +37,14 @@ public class OrderGroup {
         }
         return amount;
     }
+
+    public int getCountByCategory(VisitDate date, Event event) {
+        return orderGroup.stream()
+                .mapToInt(order -> order.getEventAvailableCount(date, event))
+                .sum();
+    }
+
+    public boolean canApplyEvent() {
+        return calculateAmount() >= 10000;
+    }
 }

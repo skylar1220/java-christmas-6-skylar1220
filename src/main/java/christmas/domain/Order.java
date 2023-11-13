@@ -36,4 +36,15 @@ public class Order {
     private int calculateAmount() {
         return count.getAmountByMenu(menu);
     }
+
+    public int getEventAvailableCount(VisitDate date, Event event) {
+        if (canApplyEvent(date, event)) {
+            return count.getCount();
+        }
+        return 0;
+    }
+
+    public boolean canApplyEvent(VisitDate date, Event event) {
+        return menu.canApplyEvent(date, event);
+    }
 }

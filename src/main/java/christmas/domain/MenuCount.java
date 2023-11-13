@@ -21,4 +21,8 @@ public class MenuCount {
     public int getAmountByMenu(Menu menu) {
         return menu.getAmountByCount(count);
     }
+
+    public int getCount() {
+        return count;
+    }
 }
