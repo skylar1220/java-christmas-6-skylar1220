@@ -15,7 +15,8 @@ public enum Menu {
     ICECREAM("아이스크림", 5000, MenuCategory.DESSERT),
     COKE_ZERO("제로콜라", 3000, MenuCategory.DRINK),
     RED_WINE("레드와인", 60000, MenuCategory.DRINK),
-    CHAMPAGNE("샴페인", 250000, MenuCategory.DRINK);
+    CHAMPAGNE("샴페인", 25000, MenuCategory.DRINK),
+    NOTHING("낫싱", 0, MenuCategory.DRINK);
 
     private final String name;
     private final int price;
@@ -48,5 +49,13 @@ public enum Menu {
 
     public boolean canApplyEvent(VisitDate date, Event event) {
         return event.canApply(category, date);
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getName() {
+        return name;
     }
 }

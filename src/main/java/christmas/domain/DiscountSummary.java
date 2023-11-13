@@ -6,14 +6,16 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class DiscountSummary {
-    private final EnumMap<Event, Integer> discountSummary;
+    private final EnumMap<Event, Integer> summary;
+    private final FreeGift freeGift;
 
-    public DiscountSummary(EnumMap<Event, Integer> discountSummary) {
-        this.discountSummary = discountSummary;
+    public DiscountSummary(EnumMap<Event, Integer> summary, FreeGift freeGift) {
+        this.summary = summary;
+        this.freeGift = freeGift;
     }
 
     public static DiscountSummary from(VisitDate date, OrderGroup orderGroup) {
-        return new DiscountSummary(getDiscountSummary(date, orderGroup));
+        return new DiscountSummary(getDiscountSummary(date, orderGroup), orderGroup.getFreeGift());
     }
 
     private static EnumMap<Event, Integer> getDiscountSummary(VisitDate date, OrderGroup orderGroup) {
@@ -28,13 +30,17 @@ public class DiscountSummary {
         return new EnumMap<>(discountSummary);
     }
 
-    public EnumMap<Event, Integer> getDiscountSummary() {
-        return discountSummary;
-    }
-
     public int getDiscountBeforeGift() {
-        return discountSummary.values().stream()
+        return summary.values().stream()
                 .mapToInt(Integer::intValue)
                 .sum();
+    }
+
+    public int getDiscountWithGift() {
+        return freeGift.sumWith(getDiscountBeforeGift());
+    }
+
+    public EnumMap<Event, Integer> getSummary() {
+        return summary;
     }
 }

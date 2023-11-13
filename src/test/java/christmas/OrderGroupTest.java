@@ -1,7 +1,9 @@
 package christmas;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import christmas.domain.FreeGift;
 import christmas.domain.OrderGroup;
 import christmas.domain.validator.OrderGroupValidator;
 import christmas.view.validator.InputValidator;
@@ -28,6 +30,7 @@ public class OrderGroupTest {
                 .isThrownBy(() -> OrderGroup.from(input))
                 .withMessage(InputValidator.ORDER_IS_INVALID);
     }
+
     public static Stream<Arguments> duplicatesData() {
         return Stream.of(
                 Arguments.of(List.of("양송이수프-1", "타파스-2", "양송이수프-2")),
@@ -58,5 +61,22 @@ public class OrderGroupTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> OrderGroup.from(input))
                 .withMessage(OrderGroupValidator.ORDER_GROUP_CONTAIN_ONLY_DRINK);
+    }
+
+
+    public static Stream<Arguments> freeGiftData() {
+        return Stream.of(
+                Arguments.of(List.of("시저샐러드-1"), FreeGift.NOTHING),
+                Arguments.of(List.of("티본스테이크-1", "바비큐립-1", "시저샐러드-1"), FreeGift.NOTHING),
+                Arguments.of(List.of("티본스테이크-2", "바비큐립-2", "초코케이크-2", "아이스크림-1", "시저샐러드-1"), FreeGift.CHAMPAGNE)
+        );
+    }
+
+    @DisplayName("(증정 혜택 적용 전) 총 할인 금액을 통해 증정 혜택을 부여한다.")
+    @ParameterizedTest
+    @MethodSource("freeGiftData")
+    void getFreeGift(List<String> rawOrderGroup, FreeGift gift) {
+        OrderGroup orderGroup = OrderGroup.from(rawOrderGroup);
+        assertThat(orderGroup.getFreeGift()).isEqualTo(gift);
     }
 }

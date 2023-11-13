@@ -47,4 +47,8 @@ public class OrderGroup {
     public boolean canApplyEvent() {
         return calculateAmount() >= 10000;
     }
+
+    public FreeGift getFreeGift() {
+        return FreeGift.from(calculateAmount());
+    }
 }
