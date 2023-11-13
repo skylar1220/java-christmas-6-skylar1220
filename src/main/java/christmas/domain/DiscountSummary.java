@@ -31,4 +31,10 @@ public class DiscountSummary {
     public EnumMap<Event, Integer> getDiscountSummary() {
         return discountSummary;
     }
+
+    public int getDiscountBeforeGift() {
+        return discountSummary.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
 }
