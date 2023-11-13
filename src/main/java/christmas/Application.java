@@ -7,10 +7,10 @@ public class Application {
         Printer printer = new ConsolePrinter();
         InputView inputView = InputView.of(reader, printer);
 
-//        OutputFomatter outputFomatter = new OutputFormatter();
-//        OutputView outputView = new OutputView(printer, outputFomatter);
-//
-//        ChristmasController christmasController = new ChreistmasController(inputView, outputView);
-//        christmasController.run();
+        OutputFomatter outputFomatter = new OutputFomatter();
+        OutputView outputView = new OutputView(printer, outputFomatter);
+
+        ChristmasController christmasController = new ChristmasController(inputView, outputView);
+        christmasController.run();
     }
 }
