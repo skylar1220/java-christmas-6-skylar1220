@@ -28,4 +28,12 @@ public class Order {
     public boolean isMenuCategory(MenuCategory category) {
         return menu.isCategory(category);
     }
+
+    public int sumAmountWith(int amount) {
+        return amount + calculateAmount();
+    }
+
+    private int calculateAmount() {
+        return count.getAmountByMenu(menu);
+    }
 }

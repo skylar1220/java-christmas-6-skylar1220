@@ -17,4 +17,8 @@ public class MenuCount {
     public int sumWith(int otherCount) {
         return count + otherCount;
     }
+
+    public int getAmountByMenu(Menu menu) {
+        return menu.getAmountByCount(count);
+    }
 }

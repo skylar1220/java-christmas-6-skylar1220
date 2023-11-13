@@ -41,4 +41,8 @@ public enum Menu {
     public boolean isCategory(MenuCategory otherCategory) {
         return category == otherCategory;
     }
+
+    public int getAmountByCount(int count) {
+        return price * count;
+    }
 }

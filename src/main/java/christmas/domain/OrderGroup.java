@@ -29,4 +29,12 @@ public class OrderGroup {
         }
         return orderGroup;
     }
+
+    public int calculateAmount() {
+        int amount = 0;
+        for (Order order : orderGroup) {
+            amount = order.sumAmountWith(amount);
+        }
+        return amount;
+    }
 }
