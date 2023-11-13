@@ -1,5 +1,7 @@
-package christmas;
+package christmas.view.validator;
 
+import christmas.util.Converter;
+import christmas.util.Seperator;
 import java.util.List;
 import java.util.regex.Pattern;
 

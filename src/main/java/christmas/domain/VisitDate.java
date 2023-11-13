@@ -1,4 +1,6 @@
-package christmas;
+package christmas.domain;
+
+import christmas.domain.validator.VisitDateValidator;
 
 public class VisitDate {
     private final int date;

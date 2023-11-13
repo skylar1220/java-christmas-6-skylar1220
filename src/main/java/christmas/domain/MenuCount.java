@@ -1,4 +1,6 @@
-package christmas;
+package christmas.domain;
+
+import christmas.domain.validator.MenuCountValidator;
 
 public class MenuCount {
     private final int count;

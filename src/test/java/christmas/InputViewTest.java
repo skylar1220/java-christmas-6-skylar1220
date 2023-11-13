@@ -2,6 +2,10 @@ package christmas;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import christmas.view.InputView;
+import christmas.view.printer.Printer;
+import christmas.view.reader.Reader;
+import christmas.view.validator.InputValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

@@ -1,4 +1,6 @@
-package christmas;
+package christmas.domain.validator;
+
+import christmas.view.validator.InputValidator;
 
 public class VisitDateValidator {
     public static void validate(int date) {

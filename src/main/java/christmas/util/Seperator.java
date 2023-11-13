@@ -1,4 +1,4 @@
-package christmas;
+package christmas.util;
 
 public class Seperator {
     private Seperator() {

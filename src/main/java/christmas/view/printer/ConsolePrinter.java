@@ -1,4 +1,6 @@
-package christmas;
+package christmas.view.printer;
+
+import christmas.view.printer.Printer;
 
 public class ConsolePrinter implements Printer {
     @Override

@@ -1,5 +1,6 @@
-package christmas;
+package christmas.domain;
 
+import christmas.view.validator.InputValidator;
 import java.util.Arrays;
 
 public enum Menu {

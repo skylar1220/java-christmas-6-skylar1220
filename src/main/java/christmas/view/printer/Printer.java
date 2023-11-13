@@ -1,4 +1,4 @@
-package christmas;
+package christmas.view.printer;
 
 public interface Printer {
     void printLine(String message);

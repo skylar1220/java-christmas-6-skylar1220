@@ -1,7 +1,11 @@
-package christmas;
+package christmas.view;
 
-import static christmas.InputValidator.ORDER_SEPARATOR;
+import static christmas.view.validator.InputValidator.ORDER_SEPARATOR;
 
+import christmas.util.Converter;
+import christmas.view.validator.InputValidator;
+import christmas.view.printer.Printer;
+import christmas.view.reader.Reader;
 import java.util.List;
 
 public class InputView {

@@ -1,5 +1,7 @@
 package christmas;
 
+import christmas.view.reader.Reader;
+
 public class FakeReader implements Reader {
     private final String input;
 

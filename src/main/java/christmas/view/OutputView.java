@@ -1,4 +1,6 @@
-package christmas;
+package christmas.view;
+
+import christmas.view.printer.Printer;
 
 public class OutputView {
     private static final String ERROR_MESSAGE_FORMAT = "[ERROR] ";

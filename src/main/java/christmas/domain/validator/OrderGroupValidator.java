@@ -1,5 +1,8 @@
-package christmas;
+package christmas.domain.validator;
 
+import christmas.domain.MenuCategory;
+import christmas.domain.Order;
+import christmas.view.validator.InputValidator;
 import java.util.List;
 
 public class OrderGroupValidator {
