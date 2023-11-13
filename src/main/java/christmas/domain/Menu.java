@@ -11,12 +11,12 @@ public enum Menu {
     BBQ_RIBS("바비큐립", 54000, MenuCategory.MAIN),
     SEAFOOD_PASTA("해산물파스타", 35000, MenuCategory.MAIN),
     CHRISTMAS_PASTA("크리스마스파스타", 25000, MenuCategory.MAIN),
-    CHOCOLATE_CAKE("초코케이크", 5000, MenuCategory.DESSERT),
+    CHOCOLATE_CAKE("초코케이크", 15000, MenuCategory.DESSERT),
     ICECREAM("아이스크림", 5000, MenuCategory.DESSERT),
     COKE_ZERO("제로콜라", 3000, MenuCategory.DRINK),
     RED_WINE("레드와인", 60000, MenuCategory.DRINK),
     CHAMPAGNE("샴페인", 25000, MenuCategory.DRINK),
-    NOTHING("낫싱", 0, MenuCategory.DRINK);
+    NOTHING("없음", 0, MenuCategory.DRINK);
 
     private final String name;
     private final int price;

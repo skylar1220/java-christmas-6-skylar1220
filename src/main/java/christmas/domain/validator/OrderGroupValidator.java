@@ -6,7 +6,6 @@ import christmas.view.validator.InputValidator;
 import java.util.List;
 
 public class OrderGroupValidator {
-    public static final String ORDER_GROUP_CONTAIN_ONLY_DRINK = "음료만 주문할 수는 없습니다. 다시 입력해주세요";
 
     public static void validate(List<Order> orderGroup) {
         validateTotalCount(orderGroup);
@@ -16,7 +15,7 @@ public class OrderGroupValidator {
 
     private static void validateCategoryOnly(MenuCategory category, List<Order> orderGroup) {
         if (hasCategoryOnly(category, orderGroup)) {
-            throw new IllegalArgumentException(ORDER_GROUP_CONTAIN_ONLY_DRINK);
+            throw new IllegalArgumentException(category.getName() + "만 주문할 수는 없습니다. 다시 입력해주세요");
         }
 
     }
@@ -52,5 +51,4 @@ public class OrderGroupValidator {
     private static boolean isInRage(int count) {
         return count >= 1 && count <= 20;
     }
-
 }

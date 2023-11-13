@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 import christmas.domain.FreeGift;
 import christmas.domain.OrderGroup;
-import christmas.domain.validator.OrderGroupValidator;
 import christmas.view.validator.InputValidator;
 import java.util.List;
 import java.util.stream.Stream;
@@ -60,7 +59,7 @@ public class OrderGroupTest {
     void validateCategoryOnly(List<String> input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> OrderGroup.from(input))
-                .withMessage(OrderGroupValidator.ORDER_GROUP_CONTAIN_ONLY_DRINK);
+                .withMessage("음료만 주문할 수는 없습니다. 다시 입력해주세요");
     }
 
 
