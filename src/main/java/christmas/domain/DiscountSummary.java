@@ -18,13 +18,6 @@ public class DiscountSummary {
     }
 
     private static EnumMap<Event, Integer> getDiscountSummary(VisitDate date, OrderGroup orderGroup) {
-//        Map<Event, Integer> discountSummary = new EnumMap<>(Event.class);
-//        if (orderGroup.canApplyEvent()) {
-//            Arrays.stream(Event.values()).forEach(event ->
-//                    discountSummary.merge(event, event.getDiscountAmount(date, orderGroup), Integer::sum)
-//            );
-//        }
-//        return new EnumMap<>(discountSummary);
         Map<Event, Integer> discountSummary = new EnumMap<>(Event.class);
         if (orderGroup.canApplyEvent()) {
             Arrays.stream(Event.values()).forEach(event -> {

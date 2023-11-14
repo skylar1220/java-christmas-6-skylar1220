@@ -4,8 +4,7 @@ import java.util.Arrays;
 
 public enum FreeGift {
     CHAMPAGNE(Menu.CHAMPAGNE, 120000),
-    NOTHING(Menu.NOTHING, 0)
-    ;
+    NOTHING(Menu.NOTHING, 0);
 
     private final String name;
     private final int price;
