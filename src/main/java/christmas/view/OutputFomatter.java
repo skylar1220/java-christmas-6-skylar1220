@@ -3,6 +3,7 @@ package christmas.view;
 import christmas.domain.Amount;
 import christmas.domain.DiscountSummary;
 import christmas.domain.Event;
+import christmas.domain.FreeGift;
 import christmas.domain.Order;
 import christmas.domain.OrderGroup;
 import christmas.domain.VisitDate;
@@ -21,24 +22,28 @@ public class OutputFomatter {
         return order.getCountNumber();
     }
 
-    public String toPurchaseAmount(OrderGroup orderGroup) {
+    public String toOrderAmount(OrderGroup orderGroup) {
         return String.format("%,d", orderGroup.calculateAmount());
     }
 
     public String toFreeGift(OrderGroup orderGroup) {
-        return orderGroup.getFreeGift().getName();
+        FreeGift gift = orderGroup.getFreeGift();
+        if (gift == FreeGift.NOTHING) {
+            return gift.getName();
+        }
+        return String.format("%s 1개", gift.getName());
     }
 
-    public String toEvent(Entry<Event, Integer> eachDiscountSummary) {
+    public String toFreeGiftPrice(DiscountSummary discountSummary) {
+        return String.format("%,d", discountSummary.getFreeGiftPrice());
+    }
+
+    public String toEventName(Entry<Event, Integer> eachDiscountSummary) {
         return eachDiscountSummary.getKey().getName();
     }
 
     public String toDiscount(Entry<Event, Integer> eachDiscountSummary) {
         return String.format("-%,d", eachDiscountSummary.getValue());
-    }
-
-    public String toFreeGiftPrice(DiscountSummary discountSummary) {
-        return String.format("%,d", discountSummary.getFreeGiftPrice());
     }
 
     public String toTotalDiscount(DiscountSummary discountSummary) {

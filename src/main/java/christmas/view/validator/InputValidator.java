@@ -22,13 +22,13 @@ public class InputValidator {
     }
 
     public void validateDate(String rawDate) {
-        validateNull(rawDate, DATE_IS_INVALID);
+        validateBlank(rawDate, DATE_IS_INVALID);
         validateNumeric(rawDate, DATE_IS_INVALID);
         validateIntegerRange(rawDate, DATE_IS_INVALID);
     }
 
     public void validateOrderGroup(String orderGroup) {
-        validateNull(orderGroup, ORDER_IS_INVALID);
+        validateBlank(orderGroup, ORDER_IS_INVALID);
         validateValidSeperator(ORDER_SEPARATOR, orderGroup, ORDER_IS_INVALID);
     }
 
@@ -52,7 +52,7 @@ public class InputValidator {
     }
 
 
-    private void validateNull(String value, String message) {
+    private void validateBlank(String value, String message) {
         if (value.isBlank()) {
             throw new IllegalArgumentException(message);
         }

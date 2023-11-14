@@ -2,12 +2,11 @@ package christmas.controller;
 
 import christmas.domain.Amount;
 import christmas.domain.DiscountSummary;
-import christmas.view.InputView;
 import christmas.domain.OrderGroup;
-import christmas.view.OutputView;
 import christmas.domain.VisitDate;
+import christmas.view.InputView;
+import christmas.view.OutputView;
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ChristmasController {
@@ -20,22 +19,14 @@ public class ChristmasController {
     }
 
     public void run() {
-
         VisitDate date = readWithRetry(this::getVisitDate);
         OrderGroup orderGroup = readWithRetry(this::getOrderGroup);
+        showEventSummary(date, orderGroup);
+    }
 
-        outputView.printPreMessageOfEvent(date);
-        outputView.printOrderGroup(orderGroup);
-        outputView.printPurchaseAmount(orderGroup);
-        outputView.printFreeGift(orderGroup);
-
-        DiscountSummary discountSummary = DiscountSummary.from(date, orderGroup);
-        outputView.printDiscountSummary(discountSummary);
-        outputView.printTotalDiscount(discountSummary);
-
-        Amount amount = Amount.of(orderGroup, discountSummary);
-        outputView.printFianlAmount(amount);
-        outputView.printBadge(discountSummary);
+    private VisitDate getVisitDate() {
+        int rawDate = readWithRetry(inputView::inputDate);
+        return VisitDate.from(rawDate);
     }
 
     private OrderGroup getOrderGroup() {
@@ -43,9 +34,12 @@ public class ChristmasController {
         return OrderGroup.from(rawOrderGroup);
     }
 
-    private VisitDate getVisitDate() {
-        int rawDate = readWithRetry(inputView::inputDate);
-        return VisitDate.from(rawDate);
+    private void showEventSummary(VisitDate date, OrderGroup orderGroup) {
+        DiscountSummary discountSummary = DiscountSummary.from(date, orderGroup);
+        Amount finalAmount = Amount.of(orderGroup, discountSummary);
+
+        outputView.printEventPreMessage(date);
+        outputView.printEvent(orderGroup, discountSummary, finalAmount);
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {
@@ -54,15 +48,6 @@ public class ChristmasController {
         } catch (IllegalArgumentException e) {
             outputView.printExceptionMessage(e.getMessage());
             return readWithRetry(supplier);
-        }
-    }
-
-    private <T, R> R readWithRetry(Function<T, R> function, T input) {
-        try {
-            return function.apply(input);
-        } catch (IllegalArgumentException e) {
-            outputView.printExceptionMessage(e.getMessage());
-            return readWithRetry(function, input);
         }
     }
 }

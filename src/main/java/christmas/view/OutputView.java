@@ -19,21 +19,26 @@ public class OutputView {
         this.formatter = formatter;
     }
 
-    public void printExceptionMessage(String message) {
-        printer.printLine(ERROR_MESSAGE_FORMAT + message);
+    public void printEventPreMessage(VisitDate rawDate) {
+        int date = formatter.toDate(rawDate);
+
+        printer.printLine("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", date);
         printer.printEmptyLine();
+    }
+
+    public void printEvent(OrderGroup orderGroup, DiscountSummary discountSummary, Amount amount) {
+        printOrderGroup(orderGroup);
+        printOrderAmount(orderGroup);
+        printFreeGift(orderGroup);
+        printDiscountSummary(discountSummary);
+        printTotalDiscount(discountSummary);
+        printFianlAmount(amount);
+        printBadge(discountSummary);
     }
 
     public void printOrderGroup(OrderGroup orderGroup) {
         printer.printLine("<주문 메뉴>");
         orderGroup.getOrderGroup().forEach(this::printOrder);
-        printer.printEmptyLine();
-    }
-
-    public void printPreMessageOfEvent(VisitDate rawDate) {
-        int date = formatter.toDate(rawDate);
-
-        printer.printLine("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", date);
         printer.printEmptyLine();
     }
 
@@ -44,8 +49,8 @@ public class OutputView {
         printer.printLine("%s %d개", menu, count);
     }
 
-    public void printPurchaseAmount(OrderGroup orderGroup) {
-        String amount = formatter.toPurchaseAmount(orderGroup);
+    public void printOrderAmount(OrderGroup orderGroup) {
+        String amount = formatter.toOrderAmount(orderGroup);
 
         printer.printLine("<할인 전 총주문 금액>");
         printer.printLine("%s원", amount);
@@ -56,37 +61,27 @@ public class OutputView {
         String gift = formatter.toFreeGift(orderGroup);
 
         printer.printLine("<증정 메뉴>");
-        if (orderGroup.canApplyEvent()) {
-            printer.printLine("%s 1개", gift);
-        }
-        if (!orderGroup.canApplyEvent()) {
-            printer.printLine("없음");
-        }
+        printer.printLine(gift);
         printer.printEmptyLine();
     }
 
     public void printDiscountSummary(DiscountSummary discountSummary) {
-
         printer.printLine("<혜택 내역>");
-
         if (discountSummary.hasDiscount()) {
-            discountSummary.getSummary().entrySet()
-                    .forEach(this::printDiscount);
+            discountSummary.getSummary().entrySet().forEach(this::printDiscount);
         }
         if (!discountSummary.hasDiscount()) {
             printer.printLine("없음");
         }
-
         if (discountSummary.hasFreeGift()) {
             String giftPrice = formatter.toFreeGiftPrice(discountSummary);
             printer.printLine("증정 이벤트: -%s원", giftPrice);
         }
-
         printer.printEmptyLine();
     }
 
     private void printDiscount(Entry<Event, Integer> eachDiscountSummary) {
-        String event = formatter.toEvent(eachDiscountSummary);
+        String event = formatter.toEventName(eachDiscountSummary);
         String discount = formatter.toDiscount(eachDiscountSummary);
 
         printer.printLine("%s 할인: %s원", event, discount);
@@ -113,5 +108,10 @@ public class OutputView {
 
         printer.printLine("<12월 이벤트 배지>");
         printer.printLine(badge);
+    }
+
+    public void printExceptionMessage(String message) {
+        printer.printLine(ERROR_MESSAGE_FORMAT + message);
+        printer.printEmptyLine();
     }
 }
