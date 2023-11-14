@@ -20,11 +20,9 @@ public class ChristmasController {
     }
 
     public void run() {
-        int rawDate = readWithRetry(inputView::inputDate);
-        VisitDate date = VisitDate.from(rawDate);
 
-        List<String> rawOrderGroup = readWithRetry(inputView::inputOrder);
-        OrderGroup orderGroup = OrderGroup.from(rawOrderGroup);
+        VisitDate date = readWithRetry(this::getVisitDate);
+        OrderGroup orderGroup = readWithRetry(this::getOrderGroup);
 
         outputView.printPreMessageOfEvent(date);
         outputView.printOrderGroup(orderGroup);
@@ -38,6 +36,16 @@ public class ChristmasController {
         Amount amount = Amount.of(orderGroup, discountSummary);
         outputView.printFianlAmount(amount);
         outputView.printBadge(discountSummary);
+    }
+
+    private OrderGroup getOrderGroup() {
+        List<String> rawOrderGroup = readWithRetry(inputView::inputOrder);
+        return OrderGroup.from(rawOrderGroup);
+    }
+
+    private VisitDate getVisitDate() {
+        int rawDate = readWithRetry(inputView::inputDate);
+        return VisitDate.from(rawDate);
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {

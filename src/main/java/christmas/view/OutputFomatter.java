@@ -26,7 +26,7 @@ public class OutputFomatter {
     }
 
     public String toFreeGift(OrderGroup orderGroup) {
-        return orderGroup.getFreeGift().name();
+        return orderGroup.getFreeGift().getName();
     }
 
     public String toEvent(Entry<Event, Integer> eachDiscountSummary) {

@@ -21,6 +21,7 @@ public class OutputView {
 
     public void printExceptionMessage(String message) {
         printer.printLine(ERROR_MESSAGE_FORMAT + message);
+        printer.printEmptyLine();
     }
 
     public void printOrderGroup(OrderGroup orderGroup) {

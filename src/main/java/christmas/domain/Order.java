@@ -49,7 +49,7 @@ public class Order {
     }
 
     public String getMenuName() {
-        return menu.name();
+        return menu.getName();
     }
 
     public int getCountNumber() {
