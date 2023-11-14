@@ -46,4 +46,16 @@ public class OutputView {
         printer.printLine("%s원", amount);
         printer.printEmptyLine();
     }
+
+    public void printFreeGift(OrderGroup orderGroup) {
+        String gift = formatter.toFreeGift(orderGroup);
+
+        printer.printLine("<증정 메뉴>");
+        if (orderGroup.canApplyEvent()) {
+            printer.printLine("%s 1개", gift);
+        }
+        if (!orderGroup.canApplyEvent()) {
+            printer.printLine("없음");
+        }
+    }
 }

@@ -20,4 +20,8 @@ public class OutputFomatter {
     public String toPurchaseAmount(OrderGroup orderGroup) {
         return String.format("%,d", orderGroup.calculateAmount());
     }
+
+    public String toFreeGift(OrderGroup orderGroup) {
+        return orderGroup.getFreeGift().name();
+    }
 }
