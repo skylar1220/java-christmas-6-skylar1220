@@ -3,6 +3,9 @@ package christmas.domain.validator;
 import christmas.common.ErrorMessage;
 
 public class VisitDateValidator {
+    private VisitDateValidator() {
+    }
+
     public static final int MIN_DATE = 1;
     public static final int MAX_DATE = 31;
 

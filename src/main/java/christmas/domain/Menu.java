@@ -39,16 +39,16 @@ public enum Menu {
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.ORDER_IS_INVALID));
     }
 
-    public boolean isCategory(MenuCategory otherCategory) {
-        return category == otherCategory;
-    }
-
     public int getAmountByCount(int count) {
         return price * count;
     }
 
     public boolean canApplyEvent(VisitDate date, Event event) {
         return event.canApply(category, date);
+    }
+
+    public boolean isCategory(MenuCategory otherCategory) {
+        return category == otherCategory;
     }
 
     public int getPrice() {

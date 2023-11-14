@@ -11,6 +11,7 @@ import christmas.util.Symbol;
 import java.util.Map.Entry;
 
 public class OutputFomatter {
+
     public static final String MINUS = Symbol.HYPHEN;
 
     public int toDate(VisitDate date) {

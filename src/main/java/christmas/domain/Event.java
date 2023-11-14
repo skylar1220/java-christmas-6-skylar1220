@@ -35,17 +35,17 @@ public enum Event {
         return 0;
     }
 
-    private int getDdayBonus(VisitDate date) {
-        int bonusDate = date.getDdayBonusDate();
-        return bonusDate * DAILY_BONUS_MONEY;
+    public boolean canApply(MenuCategory category, VisitDate date) {
+        return categories.contains(category) && dates.contains(date);
     }
 
     private boolean isEventDateMatching(Event event, VisitDate date) {
         return this == event && dates.contains(date);
     }
 
-    public boolean canApply(MenuCategory category, VisitDate date) {
-        return categories.contains(category) && dates.contains(date);
+    private int getDdayBonus(VisitDate date) {
+        int bonusDate = date.getDdayBonusDate();
+        return bonusDate * DAILY_BONUS_MONEY;
     }
 
     public String getName() {

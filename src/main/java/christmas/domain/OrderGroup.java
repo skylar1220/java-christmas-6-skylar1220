@@ -7,9 +7,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class OrderGroup {
+    public static final int MIN_EVENT_AMOUNT = 10000;
     private final List<Order> orderGroup;
 
-    public OrderGroup(List<Order> orderGroup) {
+    private OrderGroup(List<Order> orderGroup) {
         this.orderGroup = orderGroup;
     }
 
@@ -17,18 +18,6 @@ public class OrderGroup {
         List<Order> orderGroup = convertToOrderList(rawOrderGroup);
         OrderGroupValidator.validate(orderGroup);
         return new OrderGroup(orderGroup);
-    }
-
-    private static List<Order> convertToOrderList(List<String> rawOrderGroup) {
-        return rawOrderGroup.stream()
-                .map(OrderGroup::convertOrder)
-                .toList();
-    }
-
-    private static Order convertOrder(String rawOrder) {
-        String menu = Converter.splitValue(InputValidator.MENU_AND_COUNT_SEPARATOR, 0, rawOrder);
-        String count = Converter.splitValue(InputValidator.MENU_AND_COUNT_SEPARATOR, 1, rawOrder);
-        return new Order(Menu.from(menu), MenuCount.from(Converter.convertToInt(count)));
     }
 
     public int calculateAmount() {
@@ -46,11 +35,7 @@ public class OrderGroup {
     }
 
     public boolean canApplyEvent() {
-        return calculateAmount() >= MIN_EVENT_AMOUNT();
-    }
-
-    private static int MIN_EVENT_AMOUNT() {
-        return 10000;
+        return calculateAmount() >= MIN_EVENT_AMOUNT;
     }
 
     public FreeGift getFreeGift() {
@@ -59,5 +44,17 @@ public class OrderGroup {
 
     public List<Order> getOrderGroup() {
         return Collections.unmodifiableList(orderGroup);
+    }
+
+    private static List<Order> convertToOrderList(List<String> rawOrderGroup) {
+        return rawOrderGroup.stream()
+                .map(OrderGroup::convertOrder)
+                .toList();
+    }
+
+    private static Order convertOrder(String rawOrder) {
+        String menu = Converter.splitValue(InputValidator.MENU_AND_COUNT_SEPARATOR, 0, rawOrder);
+        String count = Converter.splitValue(InputValidator.MENU_AND_COUNT_SEPARATOR, 1, rawOrder);
+        return new Order(Menu.from(menu), MenuCount.from(Converter.convertToInt(count)));
     }
 }

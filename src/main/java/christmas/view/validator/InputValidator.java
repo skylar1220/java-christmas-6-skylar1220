@@ -13,6 +13,9 @@ public class InputValidator {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+");
     private static InputValidator inputValidator;
 
+    private InputValidator() {
+    }
+
     public static InputValidator getInstance() {
         if (inputValidator == null) {
             return new InputValidator();

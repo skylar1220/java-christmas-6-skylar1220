@@ -35,7 +35,7 @@ public class OutputView {
         printBadge(discountSummary);
     }
 
-    public void printOrderGroup(OrderGroup orderGroup) {
+    private void printOrderGroup(OrderGroup orderGroup) {
         printer.printLine("<주문 메뉴>");
         orderGroup.getOrderGroup().forEach(this::printOrder);
         printer.printEmptyLine();
@@ -48,7 +48,7 @@ public class OutputView {
         printer.printLine("%s %d개", menu, count);
     }
 
-    public void printOrderAmount(OrderGroup orderGroup) {
+    private void printOrderAmount(OrderGroup orderGroup) {
         String amount = formatter.toOrderAmount(orderGroup);
 
         printer.printLine("<할인 전 총주문 금액>");
@@ -56,7 +56,7 @@ public class OutputView {
         printer.printEmptyLine();
     }
 
-    public void printFreeGift(OrderGroup orderGroup) {
+    private void printFreeGift(OrderGroup orderGroup) {
         String gift = formatter.toFreeGift(orderGroup);
 
         printer.printLine("<증정 메뉴>");
@@ -64,29 +64,41 @@ public class OutputView {
         printer.printEmptyLine();
     }
 
-    public void printDiscountSummary(DiscountSummary discountSummary) {
+    private void printDiscountSummary(DiscountSummary discountSummary) {
         printer.printLine("<혜택 내역>");
+        printValidEvent(discountSummary);
+        printInvalidEvent(discountSummary);
+        printFreeGiftEvent(discountSummary);
+        printer.printEmptyLine();
+    }
+
+    private void printValidEvent(DiscountSummary discountSummary) {
         if (discountSummary.hasDiscount()) {
-            discountSummary.getSummary().entrySet().forEach(this::printDiscount);
+            discountSummary.getSummary().entrySet().forEach(this::printEvent);
         }
+    }
+
+    private void printEvent(Entry<Event, Integer> event) {
+        String eventName = formatter.toEventName(event);
+        String discount = formatter.toDiscount(event);
+
+        printer.printLine("%s 할인: %s원", eventName, discount);
+    }
+
+    private void printInvalidEvent(DiscountSummary discountSummary) {
         if (!discountSummary.hasDiscount()) {
             printer.printLine("없음");
         }
+    }
+
+    private void printFreeGiftEvent(DiscountSummary discountSummary) {
         if (discountSummary.hasFreeGift()) {
             String giftPrice = formatter.toFreeGiftPrice(discountSummary);
             printer.printLine("증정 이벤트: %s원", giftPrice);
         }
-        printer.printEmptyLine();
     }
 
-    private void printDiscount(Entry<Event, Integer> eachDiscountSummary) {
-        String event = formatter.toEventName(eachDiscountSummary);
-        String discount = formatter.toDiscount(eachDiscountSummary);
-
-        printer.printLine("%s 할인: %s원", event, discount);
-    }
-
-    public void printTotalDiscount(DiscountSummary discountSummary) {
+    private void printTotalDiscount(DiscountSummary discountSummary) {
         String totalDiscount = formatter.toTotalDiscount(discountSummary);
 
         printer.printLine("<총혜택 금액>");
@@ -94,7 +106,7 @@ public class OutputView {
         printer.printEmptyLine();
     }
 
-    public void printFianlAmount(OrderGroup orderGroup, DiscountSummary discountSummary) {
+    private void printFianlAmount(OrderGroup orderGroup, DiscountSummary discountSummary) {
         String fianlAmount = formatter.toFinalAmount(orderGroup, discountSummary);
 
         printer.printLine("<할인 후 예상 결제 금액>");
@@ -102,7 +114,7 @@ public class OutputView {
         printer.printEmptyLine();
     }
 
-    public void printBadge(DiscountSummary discountSummary) {
+    private void printBadge(DiscountSummary discountSummary) {
         String badge = formatter.toBadge(discountSummary);
 
         printer.printLine("<12월 이벤트 배지>");

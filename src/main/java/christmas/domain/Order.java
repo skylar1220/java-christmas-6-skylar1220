@@ -11,18 +11,14 @@ public class Order {
         this.count = count;
     }
 
-    public int sumCountWith(int otherCount) {
-        return count.sumWith(otherCount);
+    public int addCount(int otherCount) {
+        return count.addCount(otherCount);
     }
 
-    public boolean hasSameMenu(List<Order> orderGroup) {
+    public boolean hasDuplicateMenu(List<Order> orderGroup) {
         return orderGroup.stream()
                 .filter(order -> order.isSameMenu(menu))
                 .count() >= 2;
-    }
-
-    private boolean isSameMenu(Menu otherMenu) {
-        return menu == otherMenu;
     }
 
     public boolean isMenuCategory(MenuCategory category) {
@@ -33,19 +29,11 @@ public class Order {
         return amount + calculateAmount();
     }
 
-    private int calculateAmount() {
-        return count.getAmountByMenu(menu);
-    }
-
     public int getEventAvailableCount(VisitDate date, Event event) {
         if (canApplyEvent(date, event)) {
             return count.getCount();
         }
         return 0;
-    }
-
-    public boolean canApplyEvent(VisitDate date, Event event) {
-        return menu.canApplyEvent(date, event);
     }
 
     public String getMenuName() {
@@ -54,5 +42,17 @@ public class Order {
 
     public int getCountNumber() {
         return count.getCount();
+    }
+
+    private boolean isSameMenu(Menu otherMenu) {
+        return menu == otherMenu;
+    }
+
+    private int calculateAmount() {
+        return count.calculateAmountForMenu(menu);
+    }
+
+    private boolean canApplyEvent(VisitDate date, Event event) {
+        return menu.canApplyEvent(date, event);
     }
 }

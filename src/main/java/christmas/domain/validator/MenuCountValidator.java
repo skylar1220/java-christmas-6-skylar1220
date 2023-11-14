@@ -3,6 +3,8 @@ package christmas.domain.validator;
 import christmas.common.ErrorMessage;
 
 public class MenuCountValidator {
+    private MenuCountValidator() {
+    }
 
     public static final int MIN_MENU_COUNT = 1;
 
@@ -11,7 +13,7 @@ public class MenuCountValidator {
     }
 
     private static void validateRange(int count) {
-        if (!isInRange(count)){
+        if (!isInRange(count)) {
             throw new IllegalArgumentException(ErrorMessage.ORDER_IS_INVALID);
         }
     }

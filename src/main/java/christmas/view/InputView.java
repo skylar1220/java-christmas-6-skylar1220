@@ -13,7 +13,7 @@ public class InputView {
     private final Printer printer;
     private final InputValidator validator;
 
-    public InputView(Reader reader, Printer printer, InputValidator validator) {
+    private InputView(Reader reader, Printer printer, InputValidator validator) {
         this.reader = reader;
         this.printer = printer;
         this.validator = validator;

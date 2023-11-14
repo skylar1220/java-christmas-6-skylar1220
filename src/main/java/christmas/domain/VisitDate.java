@@ -4,11 +4,10 @@ import christmas.domain.validator.VisitDateValidator;
 import java.util.Objects;
 
 public class VisitDate {
-    public static final int event_start_date = 1;
-    public static final int EVENT_START_DATE = event_start_date;
+    public static final int EVENT_START_DATE = 1;
     private final int date;
 
-    public VisitDate(int date) {
+    private VisitDate(int date) {
         this.date = date;
     }
 
@@ -19,10 +18,6 @@ public class VisitDate {
 
     public int getDdayBonusDate() {
         return date - EVENT_START_DATE;
-    }
-
-    public int getDate() {
-        return date;
     }
 
     @Override
@@ -40,5 +35,9 @@ public class VisitDate {
     @Override
     public int hashCode() {
         return Objects.hash(date);
+    }
+
+    public int getDate() {
+        return date;
     }
 }

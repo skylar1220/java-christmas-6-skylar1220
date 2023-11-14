@@ -19,7 +19,7 @@ public class DateGroup {
 
     private final List<VisitDate> dataGroup;
 
-    public DateGroup(List<VisitDate> dateGroup) {
+    private DateGroup(List<VisitDate> dateGroup) {
         this.dataGroup = dateGroup;
     }
 
@@ -27,11 +27,8 @@ public class DateGroup {
         return new DateGroup(getDateGroup(eventName));
     }
 
-    private static List<VisitDate> getDateGroup(String eventName) {
-        return EVENT_DAY_MAP.getOrDefault(eventName, Collections.emptyList())
-                .stream()
-                .map(VisitDate::from)
-                .toList();
+    public List<VisitDate> getDataGroup() {
+        return Collections.unmodifiableList(dataGroup);
     }
 
     private static List<Integer> getDays(int startInclusive, int endInclusive) {
@@ -40,7 +37,10 @@ public class DateGroup {
                 .toList();
     }
 
-    public List<VisitDate> getDataGroup() {
-        return Collections.unmodifiableList(dataGroup);
+    private static List<VisitDate> getDateGroup(String eventName) {
+        return EVENT_DAY_MAP.getOrDefault(eventName, Collections.emptyList())
+                .stream()
+                .map(VisitDate::from)
+                .toList();
     }
 }

@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Converter {
+    private Converter() {
+    }
+
     public static int convertToInt(String input) {
         return Integer.parseInt(input);
     }

@@ -5,7 +5,7 @@ import christmas.domain.validator.MenuCountValidator;
 public class MenuCount {
     private final int count;
 
-    public MenuCount(int count) {
+    private MenuCount(int count) {
         this.count = count;
     }
 
@@ -14,12 +14,12 @@ public class MenuCount {
         return new MenuCount(count);
     }
 
-    public int sumWith(int otherCount) {
-        return count + otherCount;
+    public int calculateAmountForMenu(Menu menu) {
+        return menu.getAmountByCount(count);
     }
 
-    public int getAmountByMenu(Menu menu) {
-        return menu.getAmountByCount(count);
+    public int addCount(int otherCount) {
+        return count + otherCount;
     }
 
     public int getCount() {
