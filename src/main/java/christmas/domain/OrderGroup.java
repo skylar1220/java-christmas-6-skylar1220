@@ -3,6 +3,7 @@ package christmas.domain;
 import christmas.domain.validator.OrderGroupValidator;
 import christmas.util.Converter;
 import christmas.view.validator.InputValidator;
+import java.util.Collections;
 import java.util.List;
 
 public class OrderGroup {
@@ -57,6 +58,6 @@ public class OrderGroup {
     }
 
     public List<Order> getOrderGroup() {
-        return orderGroup;
+        return Collections.unmodifiableList(orderGroup);
     }
 }

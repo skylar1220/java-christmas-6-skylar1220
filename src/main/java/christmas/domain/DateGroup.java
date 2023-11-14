@@ -41,6 +41,6 @@ public class DateGroup {
     }
 
     public List<VisitDate> getDataGroup() {
-        return dataGroup;
+        return Collections.unmodifiableList(dataGroup);
     }
 }

@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.stream.Collectors;
 
@@ -41,7 +42,7 @@ public class DiscountSummary {
     }
 
     public EnumMap<Event, Integer> getSummary() {
-        return summary;
+        return new EnumMap<>(Collections.unmodifiableMap(summary));
     }
 
     public String getBadgeName() {
