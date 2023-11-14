@@ -91,7 +91,10 @@ public class OrderGroupTest {
     @ParameterizedTest
     @MethodSource("freeGiftData")
     void getFreeGift(List<String> rawOrderGroup, FreeGift gift) {
+        // given
         OrderGroup orderGroup = OrderGroup.from(rawOrderGroup);
+
+        // when & then
         assertThat(orderGroup.getFreeGift()).isEqualTo(gift);
     }
 }

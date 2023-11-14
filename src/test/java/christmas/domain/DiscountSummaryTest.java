@@ -32,8 +32,10 @@ public class DiscountSummaryTest {
     @ParameterizedTest
     @MethodSource("discountSummary")
     void getDiscountSummary(int date, List<String> orderGroup, Event event, int discount) {
-        DiscountSummary discountSummary = DiscountSummary.from(VisitDate.from(date),
-                OrderGroup.from(orderGroup));
+        // given
+        DiscountSummary discountSummary = DiscountSummary.from(VisitDate.from(date), OrderGroup.from(orderGroup));
+
+        // when & then
         assertThat(discountSummary.getSummary())
                 .containsEntry(event, discount);
     }
@@ -54,8 +56,10 @@ public class DiscountSummaryTest {
     @ParameterizedTest
     @MethodSource("discountBeforeGiftData")
     void getDiscountBeforeGift(int date, List<String> orderGroup, int discountBeforeGift) {
-        DiscountSummary discountSummary = DiscountSummary.from(VisitDate.from(date),
-                OrderGroup.from(orderGroup));
+        // given
+        DiscountSummary discountSummary = DiscountSummary.from(VisitDate.from(date), OrderGroup.from(orderGroup));
+
+        // when & then
         assertThat(discountSummary.getDiscountBeforeGift()).isEqualTo(discountBeforeGift);
     }
 
@@ -72,8 +76,10 @@ public class DiscountSummaryTest {
     @ParameterizedTest
     @MethodSource("discountWithGiftData")
     void getDiscountWithGift(int date, List<String> orderGroup, int discountWithGift) {
-        DiscountSummary discountSummary = DiscountSummary.from(VisitDate.from(date),
-                OrderGroup.from(orderGroup));
+        // given
+        DiscountSummary discountSummary = DiscountSummary.from(VisitDate.from(date), OrderGroup.from(orderGroup));
+
+        // when & then
         assertThat(discountSummary.getDiscountWithGift()).isEqualTo(discountWithGift);
     }
 
@@ -90,8 +96,10 @@ public class DiscountSummaryTest {
     @ParameterizedTest
     @MethodSource("badgeData")
     void getBadge(int date, List<String> orderGroup, Badge badge) {
-        DiscountSummary discountSummary = DiscountSummary.from(VisitDate.from(date),
-                OrderGroup.from(orderGroup));
+        // given
+        DiscountSummary discountSummary = DiscountSummary.from(VisitDate.from(date), OrderGroup.from(orderGroup));
+
+        // when & then
         assertThat(discountSummary.getBadge()).isEqualTo(badge);
     }
 }

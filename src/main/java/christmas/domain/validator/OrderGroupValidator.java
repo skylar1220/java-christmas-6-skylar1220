@@ -16,10 +16,7 @@ public class OrderGroupValidator {
     }
 
     private static void validateTotalCount(List<Order> orderGroup) {
-        int count = 0;
-        for (Order order : orderGroup) {
-            count = order.addCount(count);
-        }
+        int count = getTotalCount(orderGroup);
         if (!isInRage(count)) {
             throw new IllegalArgumentException("메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다. 다시 입력해 주세요.");
         }
@@ -36,6 +33,14 @@ public class OrderGroupValidator {
             throw new IllegalArgumentException(category.getName() + "만 주문할 수는 없습니다. 다시 입력해주세요");
         }
 
+    }
+
+    private static int getTotalCount(List<Order> orderGroup) {
+        int count = 0;
+        for (Order order : orderGroup) {
+            count = order.addCount(count);
+        }
+        return count;
     }
 
     private static boolean isInRage(int count) {
