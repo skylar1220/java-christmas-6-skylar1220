@@ -20,11 +20,14 @@ public class OutputView {
     }
 
     public void printOrderGroup(OrderGroup orderGroup) {
+        printer.printLine("<주문 메뉴>");
         orderGroup.getOrderGroup().forEach(this::printOrder);
+        printer.printEmptyLine();
     }
 
     public void printPreMessageOfEvent(VisitDate rawDate) {
         int date = formatter.toDate(rawDate);
+
         printer.printLine("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", date);
         printer.printEmptyLine();
     }
@@ -32,7 +35,15 @@ public class OutputView {
     private void printOrder(Order order) {
         String menu = formatter.toMenu(order);
         int count = formatter.toMenuCount(order);
-        printer.printLine("<주문 메뉴>");
+
         printer.printLine("%s %d개", menu, count);
+    }
+
+    public void printPurchaseAmount(OrderGroup orderGroup) {
+        String amount = formatter.toPurchaseAmount(orderGroup);
+
+        printer.printLine("<할인 전 총주문 금액>");
+        printer.printLine("%s원", amount);
+        printer.printEmptyLine();
     }
 }

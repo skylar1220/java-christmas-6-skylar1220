@@ -63,6 +63,24 @@ public class OrderGroupTest {
     }
 
 
+    public static Stream<Arguments> amountData() {
+        return Stream.of(
+                Arguments.of(List.of("시저샐러드-1"), 8000),
+                Arguments.of(List.of("티본스테이크-1", "바비큐립-1", "시저샐러드-1"), 117000),
+                Arguments.of(List.of("티본스테이크-2", "바비큐립-2", "초코케이크-2", "아이스크림-1", "시저샐러드-1"), 261000),
+                Arguments.of(List.of("타파스-1", "제로콜라-1"), 8500)
+        );
+    }
+
+    @DisplayName("주문 목록을 통해 총 구매 금액을 계산한다.")
+    @ParameterizedTest
+    @MethodSource("amountData")
+    void calculateAmount(List<String> rawOrderGroup, int amount) {
+        OrderGroup orderGroup = OrderGroup.from(rawOrderGroup);
+        assertThat(orderGroup.calculateAmount()).isEqualTo(amount);
+    }
+
+
     public static Stream<Arguments> freeGiftData() {
         return Stream.of(
                 Arguments.of(List.of("시저샐러드-1"), FreeGift.NOTHING),

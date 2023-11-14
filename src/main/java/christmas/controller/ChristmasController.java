@@ -26,6 +26,8 @@ public class ChristmasController {
 
         outputView.printPreMessageOfEvent(date);
         outputView.printOrderGroup(orderGroup);
+
+        outputView.printPurchaseAmount(orderGroup);
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {

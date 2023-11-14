@@ -1,6 +1,7 @@
 package christmas.view;
 
 import christmas.domain.Order;
+import christmas.domain.OrderGroup;
 import christmas.domain.VisitDate;
 
 public class OutputFomatter {
@@ -14,5 +15,9 @@ public class OutputFomatter {
 
     public int toMenuCount(Order order) {
         return order.getCountNumber();
+    }
+
+    public String toPurchaseAmount(OrderGroup orderGroup) {
+        return String.format("%,d", orderGroup.calculateAmount());
     }
 }
