@@ -1,11 +1,9 @@
-package christmas;
+package christmas.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import christmas.common.ErrorMessage;
-import christmas.domain.FreeGift;
-import christmas.domain.OrderGroup;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;

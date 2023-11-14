@@ -1,17 +1,24 @@
-package christmas;
+package christmas.view;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import christmas.common.ErrorMessage;
-import christmas.view.InputView;
+import christmas.mock.FakePrinter;
+import christmas.mock.FakeReader;
 import christmas.view.printer.Printer;
 import christmas.view.reader.Reader;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class InputViewTest {
-    private Printer printer = new FakePrinter();
+    private Printer printer;
+
+    @BeforeEach
+    void setUp() {
+        this.printer = new FakePrinter();
+    }
 
     @DisplayName("날짜의 입력 형식은 공백이 아니고, 숫자이며, integer 범위내여야 한다.")
     @ParameterizedTest

@@ -1,4 +1,4 @@
-package christmas;
+package christmas.mock;
 
 import christmas.view.reader.Reader;
 

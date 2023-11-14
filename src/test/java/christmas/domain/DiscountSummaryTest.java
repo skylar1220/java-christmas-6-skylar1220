@@ -1,12 +1,11 @@
-package christmas;
+package christmas.domain;
 
+import static christmas.constant.testConstant.WEEKDAY_DAY26;
+import static christmas.constant.testConstant.WEEKDAY_SPECIAL_D_DAY25;
+import static christmas.constant.testConstant.WEEKDAY_SPECIAL_D_DAY3;
+import static christmas.constant.testConstant.WEEKEND_D_DAY1;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.domain.Badge;
-import christmas.domain.DiscountSummary;
-import christmas.domain.Event;
-import christmas.domain.OrderGroup;
-import christmas.domain.VisitDate;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -18,14 +17,14 @@ public class DiscountSummaryTest {
     public static Stream<Arguments> discountSummary() {
         List<String> main2_dessert3_order = List.of("티본스테이크-2", "초코케이크-2", "아이스크림-1");
         return Stream.of(
-                Arguments.of(1, main2_dessert3_order, Event.D_DAY, 1000),
-                Arguments.of(1, main2_dessert3_order, Event.WEEKEND, 4046),
+                Arguments.of(WEEKEND_D_DAY1, main2_dessert3_order, Event.D_DAY, 1000),
+                Arguments.of(WEEKEND_D_DAY1, main2_dessert3_order, Event.WEEKEND, 4046),
 
-                Arguments.of(25, main2_dessert3_order, Event.D_DAY, 3400),
-                Arguments.of(25, main2_dessert3_order, Event.WEEKDAY, 6069),
-                Arguments.of(25, main2_dessert3_order, Event.SPECIAL, 1000),
+                Arguments.of(WEEKDAY_SPECIAL_D_DAY25, main2_dessert3_order, Event.D_DAY, 3400),
+                Arguments.of(WEEKDAY_SPECIAL_D_DAY25, main2_dessert3_order, Event.WEEKDAY, 6069),
+                Arguments.of(WEEKDAY_SPECIAL_D_DAY25, main2_dessert3_order, Event.SPECIAL, 1000),
 
-                Arguments.of(26, main2_dessert3_order, Event.WEEKDAY, 6069)
+                Arguments.of(WEEKDAY_DAY26, main2_dessert3_order, Event.WEEKDAY, 6069)
         );
     }
 
@@ -40,12 +39,14 @@ public class DiscountSummaryTest {
     }
 
     public static Stream<Arguments> discountBeforeGiftData() {
+        List<String> main4_dessert3_appetizer1 = List.of("티본스테이크-2", "바비큐립-2", "초코케이크-2", "아이스크림-1", "시저샐러드-1");
+
         return Stream.of(
-                Arguments.of(1, List.of("시저샐러드-1"), 0),
-                Arguments.of(1, List.of("티본스테이크-2", "바비큐립-2", "초코케이크-2", "아이스크림-1", "시저샐러드-1"), 9092),
-                Arguments.of(3, List.of("티본스테이크-2", "바비큐립-2", "초코케이크-2", "아이스크림-1", "시저샐러드-1"), 8269),
-                Arguments.of(25, List.of("티본스테이크-2", "바비큐립-2", "초코케이크-2", "아이스크림-1", "시저샐러드-1"), 10469),
-                Arguments.of(26, List.of("티본스테이크-2", "바비큐립-2", "초코케이크-2", "아이스크림-1", "시저샐러드-1"), 6069)
+                Arguments.of(WEEKEND_D_DAY1, List.of("시저샐러드-1"), 0),
+                Arguments.of(WEEKEND_D_DAY1, main4_dessert3_appetizer1, 9092),
+                Arguments.of(WEEKDAY_SPECIAL_D_DAY3, main4_dessert3_appetizer1, 8269),
+                Arguments.of(WEEKDAY_SPECIAL_D_DAY25, main4_dessert3_appetizer1, 10469),
+                Arguments.of(WEEKDAY_DAY26, main4_dessert3_appetizer1, 6069)
         );
     }
 
