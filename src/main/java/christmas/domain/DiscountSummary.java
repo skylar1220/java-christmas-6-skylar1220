@@ -17,6 +17,7 @@ public class DiscountSummary {
     public static DiscountSummary from(VisitDate date, OrderGroup orderGroup) {
         EnumMap<Event, Integer> discountSummary = getDiscountSummary(date, orderGroup);
         FreeGift freeGift = orderGroup.getFreeGift();
+
         return new DiscountSummary(discountSummary, freeGift);
     }
 

@@ -17,6 +17,7 @@ public class OrderGroup {
     public static OrderGroup from(List<String> rawOrderGroup) {
         List<Order> orderGroup = convertToOrderList(rawOrderGroup);
         OrderGroupValidator.validate(orderGroup);
+        
         return new OrderGroup(orderGroup);
     }
 
