@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.domain.Amount;
 import christmas.domain.DiscountSummary;
 import christmas.view.InputView;
 import christmas.domain.OrderGroup;
@@ -33,6 +34,10 @@ public class ChristmasController {
         DiscountSummary discountSummary = DiscountSummary.from(date, orderGroup);
         outputView.printDiscountSummary(discountSummary);
         outputView.printTotalDiscount(discountSummary);
+
+        Amount amount = Amount.of(orderGroup, discountSummary);
+        outputView.printFianlAmount(amount);
+        outputView.printBadge(discountSummary);
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {

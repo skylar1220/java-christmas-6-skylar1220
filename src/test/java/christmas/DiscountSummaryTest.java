@@ -78,7 +78,7 @@ public class DiscountSummaryTest {
     public static Stream<Arguments> badgeData() {
         return Stream.of(
                 Arguments.of(3, List.of("시저샐러드-1"), Badge.NOTHING),
-                Arguments.of(3, List.of("티본스테이크-1", "바비큐립-1", "초코케이크-2"), Badge.STAR),
+                Arguments.of(3, List.of("티본스테이크-1", "초코케이크-2"), Badge.STAR),
                 Arguments.of(3, List.of("타파스-1", "초코케이크-2", "아이스크림-3"), Badge.TREE),
                 Arguments.of(3, List.of("티본스테이크-1", "바비큐립-1", "초코케이크-2", "제로콜라-1"), Badge.SANTA)
         );

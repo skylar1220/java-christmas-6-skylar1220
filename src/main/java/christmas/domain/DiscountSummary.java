@@ -51,8 +51,12 @@ public class DiscountSummary {
         return summary;
     }
 
+    public String getBadgeName() {
+        Badge badge =  Badge.from(getDiscountWithGift());
+        return badge.getName();
+    }
     public Badge getBadge() {
-        return Badge.from(getDiscountWithGift());
+        return  Badge.from(getDiscountWithGift());
     }
 
     public boolean hasDiscount() {

@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.domain.Amount;
 import christmas.domain.DiscountSummary;
 import christmas.domain.Event;
 import christmas.domain.Order;
@@ -87,13 +88,29 @@ public class OutputView {
         String event = formatter.toEvent(eachDiscountSummary);
         String discount = formatter.toDiscount(eachDiscountSummary);
 
-        printer.printLine("%s 할인: -%s원", event, discount);
+        printer.printLine("%s 할인: %s원", event, discount);
     }
 
     public void printTotalDiscount(DiscountSummary discountSummary) {
         String totalDiscount = formatter.toTotalDiscount(discountSummary);
 
         printer.printLine("<총혜택 금액>");
-        printer.printLine("-%s원", totalDiscount);
+        printer.printLine("%s원", totalDiscount);
+        printer.printEmptyLine();
+    }
+
+    public void printFianlAmount(Amount amount) {
+        String fianlAmount = formatter.toFianlAmount(amount);
+
+        printer.printLine("<할인 후 예상 결제 금액>");
+        printer.printLine("%s원", fianlAmount);
+        printer.printEmptyLine();
+    }
+
+    public void printBadge(DiscountSummary discountSummary) {
+        String badge = formatter.toBadge(discountSummary);
+
+        printer.printLine("<12월 이벤트 배지>");
+        printer.printLine(badge);
     }
 }

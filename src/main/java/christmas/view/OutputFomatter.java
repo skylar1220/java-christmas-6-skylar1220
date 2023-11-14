@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.domain.Amount;
 import christmas.domain.DiscountSummary;
 import christmas.domain.Event;
 import christmas.domain.Order;
@@ -33,7 +34,7 @@ public class OutputFomatter {
     }
 
     public String toDiscount(Entry<Event, Integer> eachDiscountSummary) {
-        return String.format("%,d", eachDiscountSummary.getValue());
+        return String.format("-%,d", eachDiscountSummary.getValue());
     }
 
     public String toFreeGiftPrice(DiscountSummary discountSummary) {
@@ -41,6 +42,18 @@ public class OutputFomatter {
     }
 
     public String toTotalDiscount(DiscountSummary discountSummary) {
-        return String.format("%,d", discountSummary.getDiscountWithGift());
+        String minus = "";
+        if (discountSummary.hasDiscount()) {
+            minus = "-";
+        }
+        return String.format(minus + "%,d", discountSummary.getDiscountWithGift());
+    }
+
+    public String toFianlAmount(Amount amount) {
+        return String.format("%,d", amount.getAmount());
+    }
+
+    public String toBadge(DiscountSummary discountSummary) {
+        return discountSummary.getBadgeName();
     }
 }

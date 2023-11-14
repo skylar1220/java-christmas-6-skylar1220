@@ -83,9 +83,9 @@ public class OrderGroupTest {
 
     public static Stream<Arguments> freeGiftData() {
         return Stream.of(
-                Arguments.of(List.of("시저샐러드-1"), FreeGift.NOTHING),
-                Arguments.of(List.of("티본스테이크-1", "바비큐립-1", "시저샐러드-1"), FreeGift.NOTHING),
-                Arguments.of(List.of("티본스테이크-2", "바비큐립-2", "초코케이크-2", "아이스크림-1", "시저샐러드-1"), FreeGift.CHAMPAGNE)
+                Arguments.of(List.of("시저샐러드-1"), FreeGift.없음),
+                Arguments.of(List.of("티본스테이크-1", "바비큐립-1", "시저샐러드-1"), FreeGift.없음),
+                Arguments.of(List.of("티본스테이크-2", "바비큐립-2", "초코케이크-2", "아이스크림-1", "시저샐러드-1"), FreeGift.샴페인)
         );
     }
 
