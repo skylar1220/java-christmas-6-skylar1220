@@ -21,13 +21,13 @@ public enum Event {
     }
 
     public int getDiscountAmount(VisitDate date, OrderGroup orderGroup) {
-        if (matchesEventDate(D_DAY, date)) {
+        if (isEventDateMatching(D_DAY, date)) {
             return discount + getDdayBonus(date);
         }
-        if (matchesEventDate(SPECIAL, date)) {
+        if (isEventDateMatching(SPECIAL, date)) {
             return discount;
         }
-        if (matchesEventDate(WEEKDAY, date) || matchesEventDate(WEEKEND, date)) {
+        if (isEventDateMatching(WEEKDAY, date) || isEventDateMatching(WEEKEND, date)) {
             int count = orderGroup.getCountByCategory(date, this);
             return discount * count;
         }
@@ -39,7 +39,7 @@ public enum Event {
         return bonusDate * 100;
     }
 
-    private boolean matchesEventDate(Event event, VisitDate date) {
+    private boolean isEventDateMatching(Event event, VisitDate date) {
         return this == event && dates.contains(date);
     }
 

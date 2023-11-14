@@ -1,15 +1,15 @@
 package christmas.view.validator;
 
 import christmas.util.Converter;
-import christmas.util.Seperator;
+import christmas.util.Separator;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class InputValidator {
     public static final String DATE_IS_INVALID = "유효하지 않은 날짜입니다. 다시 입력해 주세요.";
     public static final String ORDER_IS_INVALID = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
-    public static final String ORDER_SEPARATOR = Seperator.COMMA;
-    public static final String MENU_AND_COUNT_SEPARATOR = Seperator.HYPHEN;
+    public static final String ORDER_SEPARATOR = Separator.COMMA;
+    public static final String MENU_AND_COUNT_SEPARATOR = Separator.HYPHEN;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+");
     private static InputValidator inputValidator;
@@ -33,22 +33,22 @@ public class InputValidator {
     }
 
     public void validateOrder(List<String> orderGroup) {
-        orderGroup.forEach(order -> validateHasSeperator(MENU_AND_COUNT_SEPARATOR, order, ORDER_IS_INVALID));
+        orderGroup.forEach(order -> validateContains(MENU_AND_COUNT_SEPARATOR, order, ORDER_IS_INVALID));
         orderGroup.forEach(order -> validateValidSeperator(MENU_AND_COUNT_SEPARATOR, order, ORDER_IS_INVALID));
     }
 
-    public void validateOrderCount(List<String> orderGroup) {
+    public void validateMenuCount(List<String> orderGroup) {
         for (String order : orderGroup) {
-            String count = Converter.getSplittedValue(MENU_AND_COUNT_SEPARATOR, 1, order);
+            String count = Converter.splitValue(MENU_AND_COUNT_SEPARATOR, 1, order);
             validateNumeric(count, ORDER_IS_INVALID);
             validateIntegerRange(count, ORDER_IS_INVALID);
         }
     }
 
-    private void validateValidSeperator(String seperator, String value, String message) {
-        validateDoubleSeperator(seperator, value, message);
-        validateStartWord(seperator, value, message);
-        validateEndWord(seperator, value, message);
+    private void validateValidSeperator(String separator, String value, String message) {
+        validateDoubleSeperator(separator, value, message);
+        validateStartWord(separator, value, message);
+        validateEndWord(separator, value, message);
     }
 
 
@@ -71,26 +71,26 @@ public class InputValidator {
         }
     }
 
-    private void validateHasSeperator(String seperator, String value, String message) {
-        if (!value.contains(seperator)) {
+    private void validateContains(String substring, String value, String message) {
+        if (!value.contains(substring)) {
             throw new IllegalArgumentException(message);
         }
     }
 
-    private void validateDoubleSeperator(String seperator, String value, String message) {
-        if (containsDoubleSeperator(seperator, value)) {
+    private void validateDoubleSeperator(String separator, String value, String message) {
+        if (containsDoubleSeperator(separator, value)) {
             throw new IllegalArgumentException(message);
         }
     }
 
-    private void validateStartWord(String seperator, String value, String message) {
-        if (value.startsWith(seperator)) {
+    private void validateStartWord(String separator, String value, String message) {
+        if (value.startsWith(separator)) {
             throw new IllegalArgumentException(message);
         }
     }
 
-    private void validateEndWord(String seperator, String value, String message) {
-        if (value.endsWith(seperator)) {
+    private void validateEndWord(String separator, String value, String message) {
+        if (value.endsWith(separator)) {
             throw new IllegalArgumentException(message);
         }
     }
@@ -99,8 +99,8 @@ public class InputValidator {
         return NUMBER_PATTERN.matcher(value).matches();
     }
 
-    private boolean containsDoubleSeperator(String seperator, String value) {
-        String doubleSeperator = seperator.repeat(2);
+    private boolean containsDoubleSeperator(String separator, String value) {
+        String doubleSeperator = separator.repeat(2);
         return value.contains(doubleSeperator);
     }
 }

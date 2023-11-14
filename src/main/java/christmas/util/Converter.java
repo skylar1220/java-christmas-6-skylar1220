@@ -8,11 +8,11 @@ public class Converter {
         return Integer.parseInt(input);
     }
 
-    public static List<String> split(String seperator, String value) {
-        return Arrays.asList(value.split(seperator));
+    public static List<String> splitToList(String separator, String value) {
+        return Arrays.asList(value.split(separator));
     }
 
-    public static String getSplittedValue(String seperator, int index, String value) {
-        return split(seperator, value).get(index);
+    public static String splitValue(String separator, int index, String value) {
+        return splitToList(separator, value).get(index);
     }
 }

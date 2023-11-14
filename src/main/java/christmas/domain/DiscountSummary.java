@@ -2,7 +2,7 @@ package christmas.domain;
 
 import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 public class DiscountSummary {
     private final EnumMap<Event, Integer> summary;
@@ -14,20 +14,20 @@ public class DiscountSummary {
     }
 
     public static DiscountSummary from(VisitDate date, OrderGroup orderGroup) {
-        return new DiscountSummary(getDiscountSummary(date, orderGroup), orderGroup.getFreeGift());
+        EnumMap<Event, Integer> discountSummary = getDiscountSummary(date, orderGroup);
+        FreeGift freeGift = orderGroup.getFreeGift();
+        return new DiscountSummary(discountSummary, freeGift);
     }
 
     private static EnumMap<Event, Integer> getDiscountSummary(VisitDate date, OrderGroup orderGroup) {
-        Map<Event, Integer> discountSummary = new EnumMap<>(Event.class);
-        if (orderGroup.canApplyEvent()) {
-            Arrays.stream(Event.values()).forEach(event -> {
-                int discountAmount = event.getDiscountAmount(date, orderGroup);
-                if (discountAmount != 0) {
-                    discountSummary.put(event, discountAmount);
-                }
-            });
-        }
-        return new EnumMap<>(discountSummary);
+        return Arrays.stream(Event.values())
+                .filter(event -> orderGroup.canApplyEvent()
+                        && event.getDiscountAmount(date, orderGroup) > 0)
+                .collect(Collectors.toMap(
+                        event -> event,
+                        event -> event.getDiscountAmount(date, orderGroup),
+                        (a, b) -> a,
+                        () -> new EnumMap<>(Event.class)));
     }
 
     public int getDiscountBeforeGift() {
@@ -45,11 +45,12 @@ public class DiscountSummary {
     }
 
     public String getBadgeName() {
-        Badge badge =  Badge.from(getDiscountWithGift());
+        Badge badge = Badge.from(getDiscountWithGift());
         return badge.getName();
     }
+
     public Badge getBadge() {
-        return  Badge.from(getDiscountWithGift());
+        return Badge.from(getDiscountWithGift());
     }
 
     public boolean hasDiscount() {

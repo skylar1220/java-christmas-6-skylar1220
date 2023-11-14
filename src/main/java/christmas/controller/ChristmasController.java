@@ -1,6 +1,5 @@
 package christmas.controller;
 
-import christmas.domain.Amount;
 import christmas.domain.DiscountSummary;
 import christmas.domain.OrderGroup;
 import christmas.domain.VisitDate;
@@ -36,10 +35,9 @@ public class ChristmasController {
 
     private void showEventSummary(VisitDate date, OrderGroup orderGroup) {
         DiscountSummary discountSummary = DiscountSummary.from(date, orderGroup);
-        Amount finalAmount = Amount.of(orderGroup, discountSummary);
 
         outputView.printEventPreMessage(date);
-        outputView.printEvent(orderGroup, discountSummary, finalAmount);
+        outputView.printEvent(orderGroup, discountSummary);
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {

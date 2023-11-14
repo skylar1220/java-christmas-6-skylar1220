@@ -1,6 +1,5 @@
 package christmas.view;
 
-import christmas.domain.Amount;
 import christmas.domain.DiscountSummary;
 import christmas.domain.Event;
 import christmas.domain.Order;
@@ -26,13 +25,13 @@ public class OutputView {
         printer.printEmptyLine();
     }
 
-    public void printEvent(OrderGroup orderGroup, DiscountSummary discountSummary, Amount amount) {
+    public void printEvent(OrderGroup orderGroup, DiscountSummary discountSummary) {
         printOrderGroup(orderGroup);
         printOrderAmount(orderGroup);
         printFreeGift(orderGroup);
         printDiscountSummary(discountSummary);
         printTotalDiscount(discountSummary);
-        printFianlAmount(amount);
+        printFianlAmount(orderGroup, discountSummary);
         printBadge(discountSummary);
     }
 
@@ -75,7 +74,7 @@ public class OutputView {
         }
         if (discountSummary.hasFreeGift()) {
             String giftPrice = formatter.toFreeGiftPrice(discountSummary);
-            printer.printLine("증정 이벤트: -%s원", giftPrice);
+            printer.printLine("증정 이벤트: %s원", giftPrice);
         }
         printer.printEmptyLine();
     }
@@ -95,8 +94,8 @@ public class OutputView {
         printer.printEmptyLine();
     }
 
-    public void printFianlAmount(Amount amount) {
-        String fianlAmount = formatter.toFianlAmount(amount);
+    public void printFianlAmount(OrderGroup orderGroup, DiscountSummary discountSummary) {
+        String fianlAmount = formatter.toFinalAmount(orderGroup, discountSummary);
 
         printer.printLine("<할인 후 예상 결제 금액>");
         printer.printLine("%s원", fianlAmount);

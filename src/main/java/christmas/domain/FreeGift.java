@@ -18,7 +18,7 @@ public enum FreeGift {
 
     public static FreeGift from(int amount) {
         return Arrays.stream(values())
-                .filter(gift -> gift.criterionAmount <= amount)
+                .filter(gift -> amount >= gift.criterionAmount)
                 .findFirst()
                 .orElse(NOTHING);
     }
