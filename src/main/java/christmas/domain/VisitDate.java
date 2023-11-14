@@ -19,6 +19,10 @@ public class VisitDate {
         return date - 1;
     }
 
+    public int getDate() {
+        return date;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

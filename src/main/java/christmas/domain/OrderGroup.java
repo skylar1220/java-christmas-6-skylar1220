@@ -51,4 +51,8 @@ public class OrderGroup {
     public FreeGift getFreeGift() {
         return FreeGift.from(calculateAmount());
     }
+
+    public List<Order> getOrderGroup() {
+        return orderGroup;
+    }
 }

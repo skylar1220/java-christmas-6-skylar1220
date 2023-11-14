@@ -20,8 +20,12 @@ public class ChristmasController {
     public void run() {
         int rawDate = readWithRetry(inputView::inputDate);
         VisitDate date  = VisitDate.from(rawDate);
-        List<String> orderGroup = readWithRetry(inputView::inputOrder);
-        OrderGroup.from(orderGroup);
+
+        List<String> rawOrderGroup = readWithRetry(inputView::inputOrder);
+        OrderGroup orderGroup = OrderGroup.from(rawOrderGroup);
+
+        outputView.printPreMessageOfEvent(date);
+        outputView.printOrderGroup(orderGroup);
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {

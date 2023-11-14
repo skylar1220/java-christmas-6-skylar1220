@@ -47,4 +47,12 @@ public class Order {
     public boolean canApplyEvent(VisitDate date, Event event) {
         return menu.canApplyEvent(date, event);
     }
+
+    public String getMenuName() {
+        return menu.getName();
+    }
+
+    public int getCountNumber() {
+        return count.getCount();
+    }
 }
