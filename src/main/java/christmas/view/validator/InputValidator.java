@@ -29,12 +29,12 @@ public class InputValidator {
 
     public void validateOrderGroup(String orderGroup) {
         validateNull(orderGroup, ORDER_IS_INVALID);
-        validateSeperator(ORDER_SEPARATOR, orderGroup, ORDER_IS_INVALID);
+        validateValidSeperator(ORDER_SEPARATOR, orderGroup, ORDER_IS_INVALID);
     }
 
     public void validateOrder(List<String> orderGroup) {
-        orderGroup.forEach(
-                order -> validateSeperator(MENU_AND_COUNT_SEPARATOR, order, ORDER_IS_INVALID));
+        orderGroup.forEach(order -> validateHasSeperator(MENU_AND_COUNT_SEPARATOR, order, ORDER_IS_INVALID));
+        orderGroup.forEach(order -> validateValidSeperator(MENU_AND_COUNT_SEPARATOR, order, ORDER_IS_INVALID));
     }
 
     public void validateOrderCount(List<String> orderGroup) {
@@ -45,11 +45,12 @@ public class InputValidator {
         }
     }
 
-    private void validateSeperator(String seperator, String value, String message) {
+    private void validateValidSeperator(String seperator, String value, String message) {
         validateDoubleSeperator(seperator, value, message);
         validateStartWord(seperator, value, message);
         validateEndWord(seperator, value, message);
     }
+
 
     private void validateNull(String value, String message) {
         if (value.isBlank()) {
@@ -62,11 +63,16 @@ public class InputValidator {
             throw new IllegalArgumentException(message);
         }
     }
-
     private void validateIntegerRange(String value, String message) {
         try {
             Integer.parseInt(value);
         } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    private void validateHasSeperator(String seperator, String value, String message) {
+        if (!value.contains(seperator)) {
             throw new IllegalArgumentException(message);
         }
     }
