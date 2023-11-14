@@ -2,8 +2,8 @@ package christmas;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import christmas.common.ErrorMessage;
 import christmas.domain.VisitDate;
-import christmas.view.validator.InputValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -15,6 +15,6 @@ public class VisitDateTest {
     void inputDay(int input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> VisitDate.from(input))
-                .withMessage(InputValidator.DATE_IS_INVALID);
+                .withMessage(ErrorMessage.DATE_IS_INVALID);
     }
 }

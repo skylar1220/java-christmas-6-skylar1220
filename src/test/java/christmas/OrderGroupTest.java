@@ -3,10 +3,9 @@ package christmas;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import christmas.common.ErrorMessage;
 import christmas.domain.FreeGift;
 import christmas.domain.OrderGroup;
-import christmas.domain.validator.OrderGroupValidator;
-import christmas.view.validator.InputValidator;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -44,7 +43,7 @@ public class OrderGroupTest {
     void validateDuplicates(List<String> input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> OrderGroup.from(input))
-                .withMessage(InputValidator.ORDER_IS_INVALID);
+                .withMessage(ErrorMessage.ORDER_IS_INVALID);
     }
 
     public static Stream<Arguments> onlyDrinkData() {

@@ -7,9 +7,12 @@ import christmas.domain.FreeGift;
 import christmas.domain.Order;
 import christmas.domain.OrderGroup;
 import christmas.domain.VisitDate;
+import christmas.util.Symbol;
 import java.util.Map.Entry;
 
 public class OutputFomatter {
+    public static final String MINUS = Symbol.HYPHEN;
+
     public int toDate(VisitDate date) {
         return date.getDate();
     }
@@ -35,7 +38,7 @@ public class OutputFomatter {
     }
 
     public String toFreeGiftPrice(DiscountSummary discountSummary) {
-        return "-" + formatMoney(discountSummary.getFreeGiftPrice());
+        return MINUS + formatMoney(discountSummary.getFreeGiftPrice());
     }
 
     public String toEventName(Entry<Event, Integer> eachDiscountSummary) {
@@ -43,15 +46,15 @@ public class OutputFomatter {
     }
 
     public String toDiscount(Entry<Event, Integer> eachDiscountSummary) {
-        return "-" + formatMoney(eachDiscountSummary.getValue());
+        return MINUS + formatMoney(eachDiscountSummary.getValue());
     }
 
     public String toTotalDiscount(DiscountSummary discountSummary) {
-        String minus = "";
+        String sign = "";
         if (discountSummary.hasDiscount()) {
-            minus = "-";
+            sign = MINUS;
         }
-        return minus + formatMoney(discountSummary.getDiscountWithGift());
+        return sign + formatMoney(discountSummary.getDiscountWithGift());
     }
 
     public String toFinalAmount(OrderGroup orderGroup, DiscountSummary discountSummary) {

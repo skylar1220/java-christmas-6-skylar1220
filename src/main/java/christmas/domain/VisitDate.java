@@ -4,6 +4,8 @@ import christmas.domain.validator.VisitDateValidator;
 import java.util.Objects;
 
 public class VisitDate {
+    public static final int event_start_date = 1;
+    public static final int EVENT_START_DATE = event_start_date;
     private final int date;
 
     public VisitDate(int date) {
@@ -16,7 +18,7 @@ public class VisitDate {
     }
 
     public int getDdayBonusDate() {
-        return date - 1;
+        return date - EVENT_START_DATE;
     }
 
     public int getDate() {

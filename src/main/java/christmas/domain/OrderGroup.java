@@ -45,7 +45,11 @@ public class OrderGroup {
     }
 
     public boolean canApplyEvent() {
-        return calculateAmount() >= 10000;
+        return calculateAmount() >= MIN_EVENT_AMOUNT();
+    }
+
+    private static int MIN_EVENT_AMOUNT() {
+        return 10000;
     }
 
     public FreeGift getFreeGift() {

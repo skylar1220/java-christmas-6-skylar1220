@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import christmas.view.validator.InputValidator;
+import christmas.common.ErrorMessage;
 import java.util.Arrays;
 
 public enum Menu {
@@ -36,7 +36,7 @@ public enum Menu {
         return Arrays.stream(values())
                 .filter(menu -> menu.name.equals(rawMenu))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(InputValidator.ORDER_IS_INVALID));
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.ORDER_IS_INVALID));
     }
 
     public boolean isCategory(MenuCategory otherCategory) {

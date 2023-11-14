@@ -1,16 +1,15 @@
 package christmas.view.validator;
 
+import christmas.common.ErrorMessage;
 import christmas.util.Converter;
-import christmas.util.Separator;
+import christmas.util.Symbol;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class InputValidator {
-    public static final String DATE_IS_INVALID = "유효하지 않은 날짜입니다. 다시 입력해 주세요.";
-    public static final String ORDER_IS_INVALID = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
-    public static final String ORDER_SEPARATOR = Separator.COMMA;
-    public static final String MENU_AND_COUNT_SEPARATOR = Separator.HYPHEN;
 
+    public static final String ORDER_SEPARATOR = Symbol.COMMA;
+    public static final String MENU_AND_COUNT_SEPARATOR = Symbol.HYPHEN;
     private static final Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+");
     private static InputValidator inputValidator;
 
@@ -22,26 +21,27 @@ public class InputValidator {
     }
 
     public void validateDate(String rawDate) {
-        validateBlank(rawDate, DATE_IS_INVALID);
-        validateNumeric(rawDate, DATE_IS_INVALID);
-        validateIntegerRange(rawDate, DATE_IS_INVALID);
+        validateBlank(rawDate, ErrorMessage.DATE_IS_INVALID);
+        validateNumeric(rawDate, ErrorMessage.DATE_IS_INVALID);
+        validateIntegerRange(rawDate, ErrorMessage.DATE_IS_INVALID);
     }
 
     public void validateOrderGroup(String orderGroup) {
-        validateBlank(orderGroup, ORDER_IS_INVALID);
-        validateValidSeperator(ORDER_SEPARATOR, orderGroup, ORDER_IS_INVALID);
+        validateBlank(orderGroup, ErrorMessage.ORDER_IS_INVALID);
+        validateValidSeperator(ORDER_SEPARATOR, orderGroup, ErrorMessage.ORDER_IS_INVALID);
     }
 
     public void validateOrder(List<String> orderGroup) {
-        orderGroup.forEach(order -> validateContains(MENU_AND_COUNT_SEPARATOR, order, ORDER_IS_INVALID));
-        orderGroup.forEach(order -> validateValidSeperator(MENU_AND_COUNT_SEPARATOR, order, ORDER_IS_INVALID));
+        orderGroup.forEach(order -> validateContains(MENU_AND_COUNT_SEPARATOR, order, ErrorMessage.ORDER_IS_INVALID));
+        orderGroup.forEach(
+                order -> validateValidSeperator(MENU_AND_COUNT_SEPARATOR, order, ErrorMessage.ORDER_IS_INVALID));
     }
 
     public void validateMenuCount(List<String> orderGroup) {
         for (String order : orderGroup) {
             String count = Converter.splitValue(MENU_AND_COUNT_SEPARATOR, 1, order);
-            validateNumeric(count, ORDER_IS_INVALID);
-            validateIntegerRange(count, ORDER_IS_INVALID);
+            validateNumeric(count, ErrorMessage.ORDER_IS_INVALID);
+            validateIntegerRange(count, ErrorMessage.ORDER_IS_INVALID);
         }
     }
 
@@ -63,6 +63,7 @@ public class InputValidator {
             throw new IllegalArgumentException(message);
         }
     }
+
     private void validateIntegerRange(String value, String message) {
         try {
             Integer.parseInt(value);

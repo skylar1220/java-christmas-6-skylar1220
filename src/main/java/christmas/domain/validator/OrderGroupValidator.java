@@ -1,8 +1,8 @@
 package christmas.domain.validator;
 
+import christmas.common.ErrorMessage;
 import christmas.domain.MenuCategory;
 import christmas.domain.Order;
-import christmas.view.validator.InputValidator;
 import java.util.List;
 
 public class OrderGroupValidator {
@@ -29,7 +29,7 @@ public class OrderGroupValidator {
 
     private static void validateDuplicates(List<Order> orderGroup) {
         if (hasDuplicates(orderGroup)) {
-            throw new IllegalArgumentException(InputValidator.ORDER_IS_INVALID);
+            throw new IllegalArgumentException(ErrorMessage.ORDER_IS_INVALID);
         }
     }
 

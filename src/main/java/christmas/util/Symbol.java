@@ -1,7 +1,7 @@
 package christmas.util;
 
-public class Separator {
-    private Separator() {
+public class Symbol {
+    private Symbol() {
     }
 
     public static final String COMMA = ",";

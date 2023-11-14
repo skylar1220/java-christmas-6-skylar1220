@@ -3,8 +3,8 @@ package christmas;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import christmas.common.ErrorMessage;
 import christmas.domain.Menu;
-import christmas.view.validator.InputValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -17,7 +17,7 @@ public class MenuTest {
     void getInvalidMenu(String input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Menu.from(input))
-                .withMessage(InputValidator.ORDER_IS_INVALID);
+                .withMessage(ErrorMessage.ORDER_IS_INVALID);
     }
     @DisplayName("메뉴판에 있는 메뉴면 이름에 맞는 메뉴를 반환한다.")
     @ParameterizedTest

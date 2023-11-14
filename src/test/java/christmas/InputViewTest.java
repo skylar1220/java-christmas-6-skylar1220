@@ -2,10 +2,10 @@ package christmas;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import christmas.common.ErrorMessage;
 import christmas.view.InputView;
 import christmas.view.printer.Printer;
 import christmas.view.reader.Reader;
-import christmas.view.validator.InputValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -24,7 +24,7 @@ public class InputViewTest {
         // when & then
         assertThatIllegalArgumentException()
                 .isThrownBy(inputView::inputDate)
-                .withMessage(InputValidator.DATE_IS_INVALID);
+                .withMessage(ErrorMessage.DATE_IS_INVALID);
     }
 
     @DisplayName("메뉴와 갯수 조합은 ,로 구분된 올바른 형식으로 입력되어야 한다.")
@@ -38,7 +38,7 @@ public class InputViewTest {
         // when & then
         assertThatIllegalArgumentException()
                 .isThrownBy(inputView::inputOrder)
-                .withMessage(InputValidator.ORDER_IS_INVALID);
+                .withMessage(ErrorMessage.ORDER_IS_INVALID);
     }
 
     @DisplayName("개별 메뉴-갯수 조합의 입력 형식은 -로 구분된 올바른 형식으로 입력되어야 한다.")
@@ -52,7 +52,7 @@ public class InputViewTest {
         // when & then
         assertThatIllegalArgumentException()
                 .isThrownBy(inputView::inputOrder)
-                .withMessage(InputValidator.ORDER_IS_INVALID);
+                .withMessage(ErrorMessage.ORDER_IS_INVALID);
     }
 
     @DisplayName("개별 메뉴-갯수에서 갯수의 입력 형식은 공백이 아니고, 숫자이며, integer 범위내여야 한다.")
@@ -66,6 +66,6 @@ public class InputViewTest {
         // when & then
         assertThatIllegalArgumentException()
                 .isThrownBy(inputView::inputOrder)
-                .withMessage(InputValidator.ORDER_IS_INVALID);
+                .withMessage(ErrorMessage.ORDER_IS_INVALID);
     }
 }

@@ -8,6 +8,7 @@ public enum Event {
     WEEKEND("주말", 2023, List.of(MenuCategory.MAIN),  DateGroup.from("주말")),
     SPECIAL("특별", 1000, List.of(MenuCategory.values()),  DateGroup.from("특별"));
 
+    public static final int DAILY_BONUS_MONEY = 100;
     private final String name;
     private final int discount;
     private final List<MenuCategory> categories;
@@ -36,7 +37,7 @@ public enum Event {
 
     private int getDdayBonus(VisitDate date) {
         int bonusDate = date.getDdayBonusDate();
-        return bonusDate * 100;
+        return bonusDate * DAILY_BONUS_MONEY;
     }
 
     private boolean isEventDateMatching(Event event, VisitDate date) {

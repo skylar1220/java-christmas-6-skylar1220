@@ -2,8 +2,8 @@ package christmas;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import christmas.common.ErrorMessage;
 import christmas.domain.MenuCount;
-import christmas.view.validator.InputValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -15,6 +15,6 @@ public class MenuCountTest {
     void validateMenuCount(int input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> MenuCount.from(input))
-                .withMessage(InputValidator.ORDER_IS_INVALID);
+                .withMessage(ErrorMessage.ORDER_IS_INVALID);
     }
 }
