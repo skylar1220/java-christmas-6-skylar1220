@@ -109,7 +109,7 @@
 - [ ] DateGroup 방식 간소화 또는 enum화
 - [ ] freeGift NOTHING(Menu.NOTHING, 0) 으로 인한 메뉴 NOTHING 
 - [x] "타파스-1,제로콜라-1 " 처럼 앞 뒤 공백 예외처리 안되게
-- [ ] enum 상수명 영어로 돌려놓기
+- [x] enum 상수명 영어로 돌려놓기
 - [ ] 테스트 코드의 중복 제거
 
 

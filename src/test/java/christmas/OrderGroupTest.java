@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 import christmas.domain.FreeGift;
 import christmas.domain.OrderGroup;
+import christmas.domain.validator.OrderGroupValidator;
 import christmas.view.validator.InputValidator;
 import java.util.List;
 import java.util.stream.Stream;
@@ -27,7 +28,7 @@ public class OrderGroupTest {
     void getInvalidMenu(List<String> input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> OrderGroup.from(input))
-                .withMessage(InputValidator.ORDER_IS_INVALID);
+                .withMessage("메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다. 다시 입력해 주세요.");
     }
 
     public static Stream<Arguments> duplicatesData() {
@@ -83,9 +84,9 @@ public class OrderGroupTest {
 
     public static Stream<Arguments> freeGiftData() {
         return Stream.of(
-                Arguments.of(List.of("시저샐러드-1"), FreeGift.없음),
-                Arguments.of(List.of("티본스테이크-1", "바비큐립-1", "시저샐러드-1"), FreeGift.없음),
-                Arguments.of(List.of("티본스테이크-2", "바비큐립-2", "초코케이크-2", "아이스크림-1", "시저샐러드-1"), FreeGift.샴페인)
+                Arguments.of(List.of("시저샐러드-1"), FreeGift.NOTHING),
+                Arguments.of(List.of("티본스테이크-1", "바비큐립-1", "시저샐러드-1"), FreeGift.NOTHING ),
+                Arguments.of(List.of("티본스테이크-2", "바비큐립-2", "초코케이크-2", "아이스크림-1", "시저샐러드-1"), FreeGift.CHAMPAGNE)
         );
     }
 

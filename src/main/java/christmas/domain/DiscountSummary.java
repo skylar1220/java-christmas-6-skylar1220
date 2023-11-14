@@ -65,7 +65,7 @@ public class DiscountSummary {
     }
 
     public boolean hasFreeGift() {
-        return freeGift != FreeGift.없음;
+        return freeGift != FreeGift.NOTHING;
     }
 
     public int getFreeGiftPrice() {

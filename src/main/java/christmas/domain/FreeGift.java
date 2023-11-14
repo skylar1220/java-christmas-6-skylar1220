@@ -3,8 +3,8 @@ package christmas.domain;
 import java.util.Arrays;
 
 public enum FreeGift {
-    샴페인(Menu.샴페인, 120000),
-    없음(Menu.없음, 0)
+    CHAMPAGNE(Menu.CHAMPAGNE, 120000),
+    NOTHING(Menu.NOTHING, 0)
     ;
 
     private final String name;
@@ -12,7 +12,7 @@ public enum FreeGift {
     private final int criterionAmount;
 
     FreeGift(Menu menu, int criterionAmount) {
-        this.name = menu.name();
+        this.name = menu.getName();
         this.price = menu.getPrice();
         this.criterionAmount = criterionAmount;
     }
@@ -21,7 +21,7 @@ public enum FreeGift {
         return Arrays.stream(values())
                 .filter(gift -> gift.criterionAmount <= amount)
                 .findFirst()
-                .orElse(없음);
+                .orElse(NOTHING);
     }
 
     public int sumWith(int other) {
@@ -30,5 +30,9 @@ public enum FreeGift {
 
     public int getPrice() {
         return price;
+    }
+
+    public String getName() {
+        return name;
     }
 }

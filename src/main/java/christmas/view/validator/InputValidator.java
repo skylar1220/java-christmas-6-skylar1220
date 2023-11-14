@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 public class InputValidator {
     public static final String DATE_IS_INVALID = "유효하지 않은 날짜입니다. 다시 입력해 주세요.";
     public static final String ORDER_IS_INVALID = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
-    //    private static final String ORDER_COUNT_IS_OVER = "메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다. 다시 입력해 주세요.";
     public static final String ORDER_SEPARATOR = Seperator.COMMA;
     public static final String MENU_AND_COUNT_SEPARATOR = Seperator.HYPHEN;
 

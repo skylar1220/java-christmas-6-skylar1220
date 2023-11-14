@@ -16,27 +16,27 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class DiscountSummaryTest {
     public static Stream<Arguments> discountSummary() {
+        List<String> main2_dessert3_order = List.of("티본스테이크-2", "초코케이크-2", "아이스크림-1");
         return Stream.of(
-                Arguments.of(1, List.of("시저샐러드-1"), 0, 0, 0, 0),
-                Arguments.of(1, List.of("티본스테이크-2", "바비큐립-2", "초코케이크-2", "아이스크림-1", "시저샐러드-1"), 1000, 0, 8092, 0),
-                Arguments.of(3, List.of("티본스테이크-2", "바비큐립-2", "초코케이크-2", "아이스크림-1", "시저샐러드-1"), 1200, 6069, 0, 1000),
-                Arguments.of(25, List.of("티본스테이크-2", "바비큐립-2", "초코케이크-2", "아이스크림-1", "시저샐러드-1"), 3400, 6069, 0, 1000),
-                Arguments.of(26, List.of("티본스테이크-2", "바비큐립-2", "초코케이크-2", "아이스크림-1", "시저샐러드-1"), 0, 6069, 0, 0)
+                Arguments.of(1, main2_dessert3_order, Event.D_DAY, 1000),
+                Arguments.of(1, main2_dessert3_order, Event.WEEKEND, 4046),
+
+                Arguments.of(25, main2_dessert3_order, Event.D_DAY, 3400),
+                Arguments.of(25, main2_dessert3_order, Event.WEEKDAY, 6069),
+                Arguments.of(25, main2_dessert3_order, Event.SPECIAL, 1000),
+
+                Arguments.of(26, main2_dessert3_order, Event.WEEKDAY, 6069)
         );
     }
 
     @DisplayName("주문 목록을 통해 할인 항목별 할인 금액을 계산한다.")
     @ParameterizedTest
     @MethodSource("discountSummary")
-    void getDiscountSummary(int date, List<String> orderGroup, int dDayDC, int weekdayDC, int weekendDC,
-                            int specialDC) {
+    void getDiscountSummary(int date, List<String> orderGroup, Event event, int discount) {
         DiscountSummary discountSummary = DiscountSummary.from(VisitDate.from(date),
                 OrderGroup.from(orderGroup));
         assertThat(discountSummary.getSummary())
-                .containsEntry(Event.D_DAY, dDayDC)
-                .containsEntry(Event.WEEKDAY, weekdayDC)
-                .containsEntry(Event.WEEKEND, weekendDC)
-                .containsEntry(Event.SPECIAL, specialDC);
+                .containsEntry(event, discount);
     }
 
     public static Stream<Arguments> discountBeforeGiftData() {
@@ -75,6 +75,7 @@ public class DiscountSummaryTest {
                 OrderGroup.from(orderGroup));
         assertThat(discountSummary.getDiscountWithGift()).isEqualTo(discountWithGift);
     }
+
     public static Stream<Arguments> badgeData() {
         return Stream.of(
                 Arguments.of(3, List.of("시저샐러드-1"), Badge.NOTHING),
