@@ -3,7 +3,6 @@ package christmas.domain;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class DiscountSummary {
     private final EnumMap<Event, Integer> summary;
@@ -19,13 +18,21 @@ public class DiscountSummary {
     }
 
     private static EnumMap<Event, Integer> getDiscountSummary(VisitDate date, OrderGroup orderGroup) {
-        Map<Event, Integer> discountSummary = Arrays.stream(Event.values())
-                .collect(Collectors.toMap(event -> event, event -> 0));
-
+//        Map<Event, Integer> discountSummary = new EnumMap<>(Event.class);
+//        if (orderGroup.canApplyEvent()) {
+//            Arrays.stream(Event.values()).forEach(event ->
+//                    discountSummary.merge(event, event.getDiscountAmount(date, orderGroup), Integer::sum)
+//            );
+//        }
+//        return new EnumMap<>(discountSummary);
+        Map<Event, Integer> discountSummary = new EnumMap<>(Event.class);
         if (orderGroup.canApplyEvent()) {
-            Arrays.stream(Event.values()).forEach(event ->
-                    discountSummary.merge(event, event.getDiscountAmount(date, orderGroup), Integer::sum)
-            );
+            Arrays.stream(Event.values()).forEach(event -> {
+                int discountAmount = event.getDiscountAmount(date, orderGroup);
+                if (discountAmount != 0) {
+                    discountSummary.put(event, discountAmount);
+                }
+            });
         }
         return new EnumMap<>(discountSummary);
     }
@@ -46,5 +53,18 @@ public class DiscountSummary {
 
     public Badge getBadge() {
         return Badge.from(getDiscountWithGift());
+    }
+
+    public boolean hasDiscount() {
+        return summary.values().stream()
+                .anyMatch(discount -> discount != 0);
+    }
+
+    public boolean hasFreeGift() {
+        return freeGift != FreeGift.없음;
+    }
+
+    public int getFreeGiftPrice() {
+        return freeGift.getPrice();
     }
 }

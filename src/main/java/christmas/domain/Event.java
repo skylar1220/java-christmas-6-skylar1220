@@ -46,4 +46,8 @@ public enum Event {
     public boolean canApply(MenuCategory category, VisitDate date) {
         return categories.contains(category) && dates.contains(date);
     }
+
+    public String getName() {
+        return name;
+    }
 }

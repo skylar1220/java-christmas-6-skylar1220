@@ -1,9 +1,12 @@
 package christmas.view;
 
+import christmas.domain.DiscountSummary;
+import christmas.domain.Event;
 import christmas.domain.Order;
 import christmas.domain.OrderGroup;
 import christmas.domain.VisitDate;
 import christmas.view.printer.Printer;
+import java.util.Map.Entry;
 
 public class OutputView {
     private static final String ERROR_MESSAGE_FORMAT = "[ERROR] ";
@@ -57,5 +60,40 @@ public class OutputView {
         if (!orderGroup.canApplyEvent()) {
             printer.printLine("없음");
         }
+        printer.printEmptyLine();
+    }
+
+    public void printDiscountSummary(DiscountSummary discountSummary) {
+
+        printer.printLine("<혜택 내역>");
+
+        if (discountSummary.hasDiscount()) {
+            discountSummary.getSummary().entrySet()
+                    .forEach(this::printDiscount);
+        }
+        if (!discountSummary.hasDiscount()) {
+            printer.printLine("없음");
+        }
+
+        if (discountSummary.hasFreeGift()) {
+            String giftPrice = formatter.toFreeGiftPrice(discountSummary);
+            printer.printLine("증정 이벤트: -%s원", giftPrice);
+        }
+
+        printer.printEmptyLine();
+    }
+
+    private void printDiscount(Entry<Event, Integer> eachDiscountSummary) {
+        String event = formatter.toEvent(eachDiscountSummary);
+        String discount = formatter.toDiscount(eachDiscountSummary);
+
+        printer.printLine("%s 할인: -%s원", event, discount);
+    }
+
+    public void printTotalDiscount(DiscountSummary discountSummary) {
+        String totalDiscount = formatter.toTotalDiscount(discountSummary);
+
+        printer.printLine("<총혜택 금액>");
+        printer.printLine("-%s원", totalDiscount);
     }
 }
