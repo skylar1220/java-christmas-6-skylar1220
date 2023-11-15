@@ -22,11 +22,11 @@ public class OrderGroup {
     }
 
     public int calculateAmount() {
-        int amount = 0;
+        int totalAmount = 0;
         for (Order order : orderGroup) {
-            amount = order.sumAmountWith(amount);
+            totalAmount = order.sumAmountWith(totalAmount);
         }
-        return amount;
+        return totalAmount;
     }
 
     public int getCountByCategory(List<MenuCategory> categories) {

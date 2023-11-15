@@ -19,11 +19,11 @@ public class OutputFomatter {
     }
 
     public String toMenu(Order order) {
-        return order.getMenuName();
+        return order.getMenu();
     }
 
     public int toMenuCount(Order order) {
-        return order.getCountNumber();
+        return order.getCount();
     }
 
     public String toOrderAmount(OrderGroup orderGroup) {
@@ -43,7 +43,8 @@ public class OutputFomatter {
     }
 
     public String toEventName(Entry<Event, Integer> eachDiscountSummary) {
-        return eachDiscountSummary.getKey().getName();
+        Event event = eachDiscountSummary.getKey();
+        return event.getName();
     }
 
     public String toDiscount(Entry<Event, Integer> eachDiscountSummary) {

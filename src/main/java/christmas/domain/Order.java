@@ -25,8 +25,8 @@ public class Order {
         return menu.isCategory(category);
     }
 
-    public int sumAmountWith(int amount) {
-        return amount + calculateAmount();
+    public int sumAmountWith(int totalAmount) {
+        return totalAmount + calculateAmount();
     }
 
     public int getCountByCategory(List<MenuCategory> categories) {
@@ -36,19 +36,19 @@ public class Order {
         return 0;
     }
 
-    public String getMenuName() {
-        return menu.getName();
-    }
-
-    public int getCountNumber() {
-        return count.getCount();
-    }
-
     private boolean isSameMenu(Menu otherMenu) {
         return menu == otherMenu;
     }
 
     private int calculateAmount() {
         return count.calculateAmountForMenu(menu);
+    }
+
+    public String getMenu() {
+        return menu.getName();
+    }
+
+    public int getCount() {
+        return count.getCount();
     }
 }
