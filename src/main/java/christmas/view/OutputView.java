@@ -21,15 +21,15 @@ public class OutputView {
         this.formatter = formatter;
     }
 
+    public void printWelcome() {
+        printer.printLine("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
+    }
+
     public void printEventPreMessage(VisitDate rawDate) {
         int date = formatter.toDate(rawDate);
 
         printer.printLine("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", date);
         printer.printEmptyLine();
-    }
-
-    public void printWelcome() {
-        printer.printLine("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
     }
 
     public void printEvent(OrderGroup orderGroup, DiscountSummary discountSummary) {
