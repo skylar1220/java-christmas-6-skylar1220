@@ -3,7 +3,6 @@ package christmas.domain;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumMap;
-import java.util.stream.Collectors;
 
 public class DiscountSummary {
     private final EnumMap<Event, Integer> summary;
@@ -54,14 +53,14 @@ public class DiscountSummary {
     }
 
     private static EnumMap<Event, Integer> getDiscountSummary(VisitDate date, OrderGroup orderGroup) {
-        return Arrays.stream(Event.values())
-                .filter(event -> orderGroup.canApplyEvent()
-                        && event.getDiscountAmount(date, orderGroup) > 0)
-                .collect(Collectors.toMap(
-                        event -> event,
-                        event -> event.getDiscountAmount(date, orderGroup),
-                        (a, b) -> a,
-                        () -> new EnumMap<>(Event.class)));
+        EnumMap<Event, Integer> discountSummary = new EnumMap<>(Event.class);
+
+        if (orderGroup.canApplyEvent()) {
+            Arrays.stream(Event.values())
+                    .filter(event -> event.getDiscountAmount(date, orderGroup) > 0)
+                    .forEach(event -> discountSummary.put(event, event.getDiscountAmount(date, orderGroup)));
+        }
+        return discountSummary;
     }
 
     public EnumMap<Event, Integer> getSummary() {
