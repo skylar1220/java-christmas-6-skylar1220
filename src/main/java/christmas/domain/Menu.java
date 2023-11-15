@@ -2,6 +2,7 @@ package christmas.domain;
 
 import christmas.common.ErrorMessage;
 import java.util.Arrays;
+import java.util.List;
 
 public enum Menu {
     MUSHROOM_SOUP("양송이수프", 6000, MenuCategory.APPETIZER),
@@ -49,6 +50,10 @@ public enum Menu {
 
     public boolean isCategory(MenuCategory otherCategory) {
         return category == otherCategory;
+    }
+
+    public boolean hasCategory(List<MenuCategory> categories) {
+        return categories.contains(category);
     }
 
     public int getPrice() {

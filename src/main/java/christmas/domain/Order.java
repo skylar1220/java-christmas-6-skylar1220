@@ -29,8 +29,8 @@ public class Order {
         return amount + calculateAmount();
     }
 
-    public int getEventAvailableCount(VisitDate date, Event event) {
-        if (canApplyEvent(date, event)) {
+    public int getCountByCategory(List<MenuCategory> categories) {
+        if (menu.hasCategory(categories)){
             return count.getCount();
         }
         return 0;
@@ -50,9 +50,5 @@ public class Order {
 
     private int calculateAmount() {
         return count.calculateAmountForMenu(menu);
-    }
-
-    private boolean canApplyEvent(VisitDate date, Event event) {
-        return menu.canApplyEvent(date, event);
     }
 }

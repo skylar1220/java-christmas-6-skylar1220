@@ -29,9 +29,9 @@ public class OrderGroup {
         return amount;
     }
 
-    public int getCountByCategory(VisitDate date, Event event) {
+    public int getCountByCategory(List<MenuCategory> categories) {
         return orderGroup.stream()
-                .mapToInt(order -> order.getEventAvailableCount(date, event))
+                .mapToInt(order -> order.getCountByCategory(categories))
                 .sum();
     }
 

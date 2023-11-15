@@ -29,7 +29,7 @@ public enum Event {
             return discount;
         }
         if (isEventDateMatching(WEEKDAY, date) || isEventDateMatching(WEEKEND, date)) {
-            int count = orderGroup.getCountByCategory(date, this);
+            int count = orderGroup.getCountByCategory(categories);
             return discount * count;
         }
         return 0;
