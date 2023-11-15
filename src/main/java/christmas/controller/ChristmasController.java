@@ -18,9 +18,14 @@ public class ChristmasController {
     }
 
     public void run() {
+        showWelcome();
         VisitDate date = readWithRetry(this::getVisitDate);
         OrderGroup orderGroup = readWithRetry(this::getOrderGroup);
         showEventSummary(date, orderGroup);
+    }
+
+    private void showWelcome() {
+        outputView.printWelcome();
     }
 
     private VisitDate getVisitDate() {
