@@ -24,13 +24,13 @@ public class ChristmasController {
     }
 
     private VisitDate getVisitDate() {
-        int rawDate = readWithRetry(inputView::inputDate);
-        return VisitDate.from(rawDate);
+        int date = readWithRetry(inputView::inputDate);
+        return VisitDate.from(date);
     }
 
     private OrderGroup getOrderGroup() {
-        List<String> rawOrderGroup = readWithRetry(inputView::inputOrder);
-        return OrderGroup.from(rawOrderGroup);
+        List<String> orderGroup = readWithRetry(inputView::inputOrder);
+        return OrderGroup.from(orderGroup);
     }
 
     private void showEventSummary(VisitDate date, OrderGroup orderGroup) {

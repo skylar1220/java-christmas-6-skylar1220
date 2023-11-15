@@ -5,7 +5,10 @@ import christmas.domain.Event;
 import christmas.domain.Order;
 import christmas.domain.OrderGroup;
 import christmas.domain.VisitDate;
+import christmas.view.formatter.OutputFomatter;
 import christmas.view.printer.Printer;
+import java.util.EnumMap;
+import java.util.List;
 import java.util.Map.Entry;
 
 public class OutputView {
@@ -35,9 +38,12 @@ public class OutputView {
         printBadge(discountSummary);
     }
 
-    private void printOrderGroup(OrderGroup orderGroup) {
+    private void printOrderGroup(OrderGroup rawOrderGroup) {
         printer.printLine("<주문 메뉴>");
-        orderGroup.getOrderGroup().forEach(this::printOrder);
+
+        List<Order> orderGroup = rawOrderGroup.getOrderGroup();
+        orderGroup.forEach(this::printOrder);
+
         printer.printEmptyLine();
     }
 
@@ -73,8 +79,10 @@ public class OutputView {
     }
 
     private void printValidEvent(DiscountSummary discountSummary) {
+        EnumMap<Event, Integer> summary = discountSummary.getSummary();
+
         if (discountSummary.hasDiscount()) {
-            discountSummary.getSummary().entrySet().forEach(this::printEvent);
+            summary.entrySet().forEach(this::printEvent);
         }
     }
 

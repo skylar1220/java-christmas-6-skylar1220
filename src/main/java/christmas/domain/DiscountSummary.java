@@ -20,13 +20,9 @@ public class DiscountSummary {
         return new DiscountSummary(discountSummary, freeGift);
     }
 
-    public String getBadgeName() {
+    public String getBadge() {
         Badge badge = Badge.from(getDiscountWithGift());
         return badge.getName();
-    }
-
-    public Badge getBadge() {
-        return Badge.from(getDiscountWithGift());
     }
 
     public int getDiscountWithGift() {

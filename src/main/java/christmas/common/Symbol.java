@@ -1,4 +1,4 @@
-package christmas.util;
+package christmas.common;
 
 public class Symbol {
     private Symbol() {

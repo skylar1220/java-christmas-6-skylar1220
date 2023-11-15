@@ -1,13 +1,13 @@
-package christmas.view;
+package christmas.view.formatter;
 
-import christmas.util.AmountCalculator;
+import christmas.domain.AmountCalculator;
 import christmas.domain.DiscountSummary;
 import christmas.domain.Event;
 import christmas.domain.FreeGift;
 import christmas.domain.Order;
 import christmas.domain.OrderGroup;
 import christmas.domain.VisitDate;
-import christmas.util.Symbol;
+import christmas.common.Symbol;
 import java.util.Map.Entry;
 
 public class OutputFomatter {
@@ -32,9 +32,11 @@ public class OutputFomatter {
 
     public String toFreeGift(OrderGroup orderGroup) {
         FreeGift gift = orderGroup.getFreeGift();
+
         if (gift == FreeGift.NOTHING) {
             return "없음";
         }
+
         return String.format("%s 1개", gift.getName());
     }
 
@@ -42,13 +44,13 @@ public class OutputFomatter {
         return MINUS + formatMoney(discountSummary.getFreeGiftPrice());
     }
 
-    public String toEventName(Entry<Event, Integer> eachDiscountSummary) {
-        Event event = eachDiscountSummary.getKey();
+    public String toEventName(Entry<Event, Integer> eachEvent) {
+        Event event = eachEvent.getKey();
         return event.getName();
     }
 
-    public String toDiscount(Entry<Event, Integer> eachDiscountSummary) {
-        return MINUS + formatMoney(eachDiscountSummary.getValue());
+    public String toDiscount(Entry<Event, Integer> eachEvent) {
+        return MINUS + formatMoney(eachEvent.getValue());
     }
 
     public String toTotalDiscount(DiscountSummary discountSummary) {
@@ -60,11 +62,12 @@ public class OutputFomatter {
     }
 
     public String toFinalAmount(OrderGroup orderGroup, DiscountSummary discountSummary) {
-        return formatMoney(AmountCalculator.calculateFinalAmount(orderGroup, discountSummary));
+        int finalAmount = AmountCalculator.calculateFinalAmount(orderGroup, discountSummary);
+        return formatMoney(finalAmount);
     }
 
     public String toBadge(DiscountSummary discountSummary) {
-        return discountSummary.getBadgeName();
+        return discountSummary.getBadge();
     }
 
     private String formatMoney(int amount) {

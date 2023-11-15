@@ -29,7 +29,7 @@ public class Order {
         return totalAmount + calculateAmount();
     }
 
-    public int getCountByCategory(List<MenuCategory> categories) {
+    public int getMenuCountByCategory(List<MenuCategory> categories) {
         if (menu.hasCategory(categories)){
             return count.getCount();
         }

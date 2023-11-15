@@ -6,6 +6,6 @@ import christmas.view.reader.Reader;
 public class ConsoleReader implements Reader {
     @Override
     public String readLine() {
-        return Console.readLine();
+        return Console.readLine().trim();
     }
 }

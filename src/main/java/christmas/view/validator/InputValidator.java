@@ -1,8 +1,10 @@
 package christmas.view.validator;
 
+import static christmas.domain.OrderGroup.MENU_COUNT_INDEX;
+
 import christmas.common.ErrorMessage;
 import christmas.util.Converter;
-import christmas.util.Symbol;
+import christmas.common.Symbol;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -23,10 +25,10 @@ public class InputValidator {
         return inputValidator;
     }
 
-    public void validateDate(String rawDate) {
-        validateBlank(rawDate, ErrorMessage.DATE_IS_INVALID);
-        validateNumeric(rawDate, ErrorMessage.DATE_IS_INVALID);
-        validateIntegerRange(rawDate, ErrorMessage.DATE_IS_INVALID);
+    public void validateDate(String date) {
+        validateBlank(date, ErrorMessage.DATE_IS_INVALID);
+        validateNumeric(date, ErrorMessage.DATE_IS_INVALID);
+        validateIntegerRange(date, ErrorMessage.DATE_IS_INVALID);
     }
 
     public void validateOrderGroup(String orderGroup) {
@@ -42,16 +44,16 @@ public class InputValidator {
 
     public void validateMenuCount(List<String> orderGroup) {
         for (String order : orderGroup) {
-            String count = Converter.splitValue(MENU_AND_COUNT_SEPARATOR, 1, order);
+            String count = Converter.splitValue(MENU_AND_COUNT_SEPARATOR, MENU_COUNT_INDEX, order);
             validateNumeric(count, ErrorMessage.ORDER_IS_INVALID);
             validateIntegerRange(count, ErrorMessage.ORDER_IS_INVALID);
         }
     }
 
     private void validateValidSeperator(String separator, String value, String message) {
-        validateDoubleSeperator(separator, value, message);
-        validateStartWord(separator, value, message);
-        validateEndWord(separator, value, message);
+        validateDuplicateSubstring(separator, value, message);
+        validateStartSubstring(separator, value, message);
+        validateEndSubstring(separator, value, message);
     }
 
 
@@ -81,20 +83,20 @@ public class InputValidator {
         }
     }
 
-    private void validateDoubleSeperator(String separator, String value, String message) {
-        if (containsDoubleSeperator(separator, value)) {
+    private void validateDuplicateSubstring(String substring, String value, String message) {
+        if (containsDuplicateSubstring(substring, value)) {
             throw new IllegalArgumentException(message);
         }
     }
 
-    private void validateStartWord(String separator, String value, String message) {
-        if (value.startsWith(separator)) {
+    private void validateStartSubstring(String substring, String value, String message) {
+        if (value.startsWith(substring)) {
             throw new IllegalArgumentException(message);
         }
     }
 
-    private void validateEndWord(String separator, String value, String message) {
-        if (value.endsWith(separator)) {
+    private void validateEndSubstring(String substring, String value, String message) {
+        if (value.endsWith(substring)) {
             throw new IllegalArgumentException(message);
         }
     }
@@ -103,8 +105,8 @@ public class InputValidator {
         return NUMBER_PATTERN.matcher(value).matches();
     }
 
-    private boolean containsDoubleSeperator(String separator, String value) {
-        String doubleSeperator = separator.repeat(2);
-        return value.contains(doubleSeperator);
+    private boolean containsDuplicateSubstring(String substring, String value) {
+        String doubleSubstring = substring.repeat(2);
+        return value.contains(doubleSubstring);
     }
 }

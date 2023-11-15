@@ -1,7 +1,4 @@
-package christmas.util;
-
-import christmas.domain.DiscountSummary;
-import christmas.domain.OrderGroup;
+package christmas.domain;
 
 public class AmountCalculator {
     private AmountCalculator() {

@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class OrderGroup {
+    public static final int MENU_NAME_INDEX = 0;
+    public static final int MENU_COUNT_INDEX = 1;
     public static final int MIN_EVENT_AMOUNT = 10000;
     private final List<Order> orderGroup;
 
@@ -21,17 +23,9 @@ public class OrderGroup {
         return new OrderGroup(orderGroup);
     }
 
-    public int calculateAmount() {
-        int totalAmount = 0;
-        for (Order order : orderGroup) {
-            totalAmount = order.sumAmountWith(totalAmount);
-        }
-        return totalAmount;
-    }
-
-    public int getCountByCategory(List<MenuCategory> categories) {
+    public int getMenuCountByCategory(List<MenuCategory> categories) {
         return orderGroup.stream()
-                .mapToInt(order -> order.getCountByCategory(categories))
+                .mapToInt(order -> order.getMenuCountByCategory(categories))
                 .sum();
     }
 
@@ -41,6 +35,14 @@ public class OrderGroup {
 
     public FreeGift getFreeGift() {
         return FreeGift.from(calculateAmount());
+    }
+
+    public int calculateAmount() {
+        int totalAmount = 0;
+        for (Order order : orderGroup) {
+            totalAmount = order.sumAmountWith(totalAmount);
+        }
+        return totalAmount;
     }
 
     public List<Order> getOrderGroup() {
@@ -53,9 +55,9 @@ public class OrderGroup {
                 .toList();
     }
 
-    private static Order convertOrder(String rawOrder) {
-        String menu = Converter.splitValue(InputValidator.MENU_AND_COUNT_SEPARATOR, 0, rawOrder);
-        String count = Converter.splitValue(InputValidator.MENU_AND_COUNT_SEPARATOR, 1, rawOrder);
+    private static Order convertOrder(String order) {
+        String menu = Converter.splitValue(InputValidator.MENU_AND_COUNT_SEPARATOR, MENU_NAME_INDEX, order);
+        String count = Converter.splitValue(InputValidator.MENU_AND_COUNT_SEPARATOR, MENU_COUNT_INDEX, order);
         return new Order(Menu.from(menu), MenuCount.from(Converter.convertToInt(count)));
     }
 }

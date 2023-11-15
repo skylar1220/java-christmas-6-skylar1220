@@ -16,7 +16,7 @@ public class VisitDate {
         return new VisitDate(date);
     }
 
-    public int getDdayBonusDate() {
+    public int getBonusDate() {
         return date - EVENT_START_DATE;
     }
 

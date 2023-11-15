@@ -29,8 +29,8 @@ public enum Event {
             return discount;
         }
         if (isEventDateMatching(WEEKDAY, date) || isEventDateMatching(WEEKEND, date)) {
-            int count = orderGroup.getCountByCategory(categories);
-            return discount * count;
+            int menuCount = orderGroup.getMenuCountByCategory(categories);
+            return discount * menuCount;
         }
         return 0;
     }
@@ -44,7 +44,7 @@ public enum Event {
     }
 
     private int getDdayBonus(VisitDate date) {
-        int bonusDate = date.getDdayBonusDate();
+        int bonusDate = date.getBonusDate();
         return bonusDate * DAILY_BONUS_MONEY;
     }
 

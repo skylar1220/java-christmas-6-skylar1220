@@ -2,7 +2,7 @@ package christmas;
 
 import christmas.controller.ChristmasController;
 import christmas.view.InputView;
-import christmas.view.OutputFomatter;
+import christmas.view.formatter.OutputFomatter;
 import christmas.view.OutputView;
 import christmas.view.printer.ConsolePrinter;
 import christmas.view.printer.Printer;
