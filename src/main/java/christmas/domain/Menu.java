@@ -48,4 +48,8 @@ public enum Menu {
     public boolean isCategory(Category input) {
         return this.category.equals(input);
     }
+
+    public int calculatePrice(MenuCount menuCount) {
+        return menuCount.calculatePriceByCount(price);
+    }
 }

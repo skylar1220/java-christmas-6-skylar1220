@@ -17,4 +17,8 @@ public class MenuCount {
     private boolean isInRange(int menuCount) {
         return menuCount >= 1 && menuCount <= 20;
     }
+
+    public int calculatePriceByCount(int price) {
+        return price * menuCount;
+    }
 }

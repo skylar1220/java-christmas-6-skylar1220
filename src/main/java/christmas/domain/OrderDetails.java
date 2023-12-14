@@ -56,4 +56,11 @@ public class OrderDetails {
         return orderDetails.stream()
                 .allMatch(OrderDetail::isDrink);
     }
+
+    public PurchaseAmount calculatePurchaseAmount() {
+        int purchaseAmount = orderDetails.stream()
+                .mapToInt(OrderDetail::calculatePriceSum)
+                .sum();
+        return new PurchaseAmount(purchaseAmount);
+    }
 }

@@ -17,4 +17,8 @@ public class OrderDetail {
     public boolean isDrink() {
         return menu.isCategory(Category.DRINKS);
     }
+
+    public int calculatePriceSum() {
+        return menu.calculatePrice(menuCount);
+    }
 }

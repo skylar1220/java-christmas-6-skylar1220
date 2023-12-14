@@ -1,5 +1,9 @@
 package christmas.controller;
 
+import christmas.domain.EventPlanner;
+import christmas.domain.FreeGift;
+import christmas.domain.OrderDetails;
+import christmas.domain.PurchaseAmount;
 import christmas.domain.VisitingDate;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -19,6 +23,10 @@ public class ChristmasPromotionController {
         outputView.printWelcome();
         VisitingDate visitingDate = inputView.inputVisitingDate();
         OrderDetails orderDetails = inputView.inputOrderDetails();
+
+        PurchaseAmount purchaseAmount = orderDetails.calculatePurchaseAmount();
+        FreeGift freeGift = FreeGift.from(purchaseAmount);
+        EventPlanner eventPlanner = new EventPlanner(visitingDate, orderDetails);
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {
