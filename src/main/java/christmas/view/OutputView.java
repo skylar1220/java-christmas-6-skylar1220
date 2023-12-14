@@ -46,7 +46,7 @@ public class OutputView {
 
     public void printPurchaseAmount(PurchaseAmount purchaseAmount) {
         printer.printLine("<할인 전 총주문 금액>");
-        printer.printLine("%s원", OutputFomatter.formatMoney(purchaseAmount.getPurchaseAmount() + ""));
+        printer.printLine("%s원", OutputFomatter.formatMoney(purchaseAmount.getPurchaseAmount()));
     }
 
     public void printFreeGift(FreeGift freeGift) {
@@ -73,23 +73,24 @@ public class OutputView {
         if (eventWithDiscount.getValue() == 0) {
             return;
         }
-        printer.printLine("%s 할인: -%s원", eventWithDiscount.getKey().getEventName(), OutputFomatter.formatMoney(eventWithDiscount.getValue() +""));
+        printer.printLine("%s 할인: -%s원", eventWithDiscount.getKey().getEventName(), OutputFomatter.formatMoney(eventWithDiscount.getValue()));
     }
 
     public void printTotalBenefitAmount(TotalBenefitAmout totalBenefitAmout) {
         printer.printLine("<총혜택 금액>");
-        printer.printLine("-%s원", OutputFomatter.formatMoney(totalBenefitAmout.getTotalBenefitAmount() +""));
+        printer.printLine("-%s원", OutputFomatter.formatMoney(totalBenefitAmout.getTotalBenefitAmount()));
     }
 
     public void printFinalPurchaseAmount(FinalPurchaseAmout finalPurchaseAmout) {
         printer.printLine("<할인 후 예상 결제 금액>");
-        printer.printLine("%s원", OutputFomatter.formatMoney(finalPurchaseAmout.getFinalPurchaseAmount() +""));
+        printer.printLine("%s원", OutputFomatter.formatMoney(finalPurchaseAmout.getFinalPurchaseAmount()));
     }
 
     public void printBadge(Badge badge) {
         printer.printLine("<12월 이벤트 배지>");
         if (!badge.equals(Badge.NOTHING)){
             printer.printLine(badge.getName());
+            return;
         }
         printer.printLine("없음");
     }

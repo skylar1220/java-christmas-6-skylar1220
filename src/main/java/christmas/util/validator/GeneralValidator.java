@@ -27,7 +27,7 @@ public class GeneralValidator {
     }
 
     public static void validateDuplicateValues(List<String> values, String message) {
-        if (!hasDuplicates(values)) {
+        if (hasDuplicates(values)) {
             throw new IllegalArgumentException(message);
         }
     }
@@ -39,7 +39,7 @@ public class GeneralValidator {
         }
     }
     public static void validateCount(List<String> values, int requiredCount, String message) {
-        if (!hasValidCount(values, requiredCount)) {
+        if (hasValidCount(values, requiredCount)) {
             throw new IllegalArgumentException(message);
         }
     }
