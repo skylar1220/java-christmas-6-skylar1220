@@ -1,12 +1,17 @@
 package christmas.controller;
 
+import christmas.domain.Badge;
+import christmas.domain.EventBenefitSummary;
 import christmas.domain.EventPlanner;
+import christmas.domain.FinalPurchaseAmout;
 import christmas.domain.FreeGift;
 import christmas.domain.OrderDetails;
 import christmas.domain.PurchaseAmount;
+import christmas.domain.TotalBenefitAmout;
 import christmas.domain.VisitingDate;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import java.nio.channels.Pipe;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -21,12 +26,26 @@ public class ChristmasPromotionController {
 
     public void run() {
         outputView.printWelcome();
-        VisitingDate visitingDate = inputView.inputVisitingDate();
-        OrderDetails orderDetails = inputView.inputOrderDetails();
+        VisitingDate visitingDate = readWithRetry(inputView::inputVisitingDate);
+        OrderDetails orderDetails = readWithRetry(inputView::inputOrderDetails);
 
         PurchaseAmount purchaseAmount = orderDetails.calculatePurchaseAmount();
         FreeGift freeGift = FreeGift.from(purchaseAmount);
         EventPlanner eventPlanner = new EventPlanner(visitingDate, orderDetails);
+        EventBenefitSummary eventBenefitSummary = eventPlanner.calculateEventBenefit();
+        TotalBenefitAmout totalBenefitAmout = TotalBenefitAmout.of(eventBenefitSummary, freeGift);
+        FinalPurchaseAmout finalPurchaseAmout = FinalPurchaseAmout.of(purchaseAmount, totalBenefitAmout);
+        Badge badge = Badge.from(finalPurchaseAmout);
+
+        outputView.printOrderDetails(orderDetails);
+        outputView.printPurchaseAmount(purchaseAmount);
+
+        outputView.printFreeGift(freeGift);
+        outputView.printBenefirSummary(eventBenefitSummary, freeGift);
+        outputView.printTotalBenefitAmount(totalBenefitAmout);
+        outputView.printFinalPurchaseAmount(finalPurchaseAmout);
+        outputView.printBadge(badge);
+
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {

@@ -19,4 +19,8 @@ public enum FreeGift {
                 .findAny()
                 .orElse(NOTHING);
     }
+
+    public Menu getMenu() {
+        return menu;
+    }
 }

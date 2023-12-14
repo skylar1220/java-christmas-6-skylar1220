@@ -63,4 +63,19 @@ public class OrderDetails {
                 .sum();
         return new PurchaseAmount(purchaseAmount);
     }
+
+    public boolean isEventAvailable() {
+        return calculatePurchaseAmount().isOver(10000);
+    }
+
+    public int calculateDiscountOf(Category category, int discount) {
+        return orderDetails.stream()
+                .filter(orderDetail -> orderDetail.isCategory(category))
+                .mapToInt(orderDetail -> orderDetail.calculateDiscount(discount))
+                .sum();
+    }
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
 }

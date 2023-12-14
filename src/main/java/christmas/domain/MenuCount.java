@@ -21,4 +21,12 @@ public class MenuCount {
     public int calculatePriceByCount(int price) {
         return price * menuCount;
     }
+
+    public int calculateDiscountByCount(int discount) {
+        return menuCount * discount;
+    }
+
+    public int getMenuCount() {
+        return menuCount;
+    }
 }

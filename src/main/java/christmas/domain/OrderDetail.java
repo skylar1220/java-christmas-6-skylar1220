@@ -21,4 +21,20 @@ public class OrderDetail {
     public int calculatePriceSum() {
         return menu.calculatePrice(menuCount);
     }
+
+    public boolean isCategory(Category category) {
+        return menu.isCategory(category);
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public MenuCount getMenuCount() {
+        return menuCount;
+    }
+
+    public int calculateDiscount(int discount) {
+        return menuCount.calculateDiscountByCount(discount);
+    }
 }
