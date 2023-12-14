@@ -32,7 +32,7 @@ public class Converter {
         return Integer.parseInt(value);
     }
 
-    public static String splitValue(String separator, int index, String value) {
+    public static String getSplittedValueOf(String separator, int index, String value) {
         return splitToList(separator, value).get(index);
     }
 }

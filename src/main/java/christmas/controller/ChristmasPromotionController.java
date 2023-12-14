@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.domain.VisitingDate;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.function.Function;
@@ -15,6 +16,9 @@ public class ChristmasPromotionController {
     }
 
     public void run() {
+        outputView.printWelcome();
+        VisitingDate visitingDate = inputView.inputVisitingDate();
+        OrderDetails orderDetails = inputView.inputOrderDetails();
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {
